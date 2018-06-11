@@ -10,20 +10,20 @@ namespace Dolittle.Runtime.Events
     /// <summary>
     /// Represents the generation of an <see cref="IEvent"/>
     /// </summary>
-    public class EventGeneration : ConceptAs<int>
+    public class GenerationOfEvent : ConceptAs<int>
     {
         /// <summary>
         /// First generation of an event
         /// </summary>
-        public static EventGeneration First = 1;
+        public static GenerationOfEvent First = 1;
 
         /// <summary>
-        /// Implicitly convert from a <see cref="int"/> to an <see cref="EventGeneration"/>
+        /// Implicitly convert from a <see cref="int"/> to an <see cref="GenerationOfEvent"/>
         /// </summary>
         /// <param name="generation">The generation</param>
-        public static implicit operator EventGeneration(int generation)
+        public static implicit operator GenerationOfEvent(int generation)
         {
-            return new EventGeneration { Value = generation };
+            return new GenerationOfEvent { Value = generation };
         }
     }
 }

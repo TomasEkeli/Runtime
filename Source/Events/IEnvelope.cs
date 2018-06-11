@@ -30,9 +30,9 @@ namespace Dolittle.Runtime.Events
         SequenceNumber SequenceNumber { get; }
 
         /// <summary>
-        /// Gets the <see cref="EventGeneration"/> for the <see cref="IEvent"/>
+        /// Gets the <see cref="GenerationOfEvent"/> for the <see cref="IEvent"/>
         /// </summary>
-        EventGeneration Generation { get; }
+        GenerationOfEvent Generation { get; }
 
         /// <summary>
         /// Gets the <see cref="IApplicationArtifactIdentifier">identifier</see> identifying the <see cref="IEvent"/>

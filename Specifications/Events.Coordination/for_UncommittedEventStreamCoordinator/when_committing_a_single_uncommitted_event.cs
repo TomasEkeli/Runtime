@@ -51,7 +51,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
                 TransactionCorrelationId.NotSet,
                 EventId.New(),
                 SequenceNumber.Zero,
-                EventGeneration.First,
+                GenerationOfEvent.First,
                 event_identifier.Object,
                 event_source_id,
                 event_source_identifier.Object,

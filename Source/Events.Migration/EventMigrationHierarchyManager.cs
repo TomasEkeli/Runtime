@@ -34,13 +34,13 @@ namespace Dolittle.Runtime.Events.Migration
         }
 
 #pragma warning disable 1591 // Xml Comments
-        public EventGeneration GetCurrentGenerationFor(Type logicalEvent)
+        public GenerationOfEvent GetCurrentGenerationFor(Type logicalEvent)
         {
             var hierarchy = GetHierarchyForLogicalType(logicalEvent);
             return hierarchy.MigrationLevel;
         }
 
-        public Type GetTargetTypeForGeneration(Type logicalEvent, EventGeneration level)
+        public Type GetTargetTypeForGeneration(Type logicalEvent, GenerationOfEvent level)
         {
             if(level < 0)
                 throw new MigrationLevelOutOfRangeException(string.Format("The lowest possible migration level is 0.  You asked for {0}",level));
