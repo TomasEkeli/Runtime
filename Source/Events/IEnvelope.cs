@@ -12,7 +12,7 @@ namespace Dolittle.Runtime.Events
     /// <summary>
     /// Defines the envelope for the event with all the metadata related to the event
     /// </summary>
-    public interface IEventEnvelope
+    public interface IEnvelope
     {
         /// <summary>
         /// Gets the <see cref="TransactionCorrelationId"/> that the <see cref="IEvent"/> is part of
@@ -67,17 +67,17 @@ namespace Dolittle.Runtime.Events
         DateTimeOffset Occurred { get; }
 
         /// <summary>
-        /// Creates a new <see cref="EventEnvelope"/> with a different <see cref="TransactionCorrelationId">correlation id</see>
+        /// Creates a new <see cref="Envelope"/> with a different <see cref="TransactionCorrelationId">correlation id</see>
         /// </summary>
         /// <param name="correlationId"></param>
-        /// <returns>A copy of the <see cref="EventEnvelope"/> with a new <see cref="TransactionCorrelationId"/> </returns>
-        IEventEnvelope WithTransactionCorrelationId(TransactionCorrelationId correlationId);
+        /// <returns>A copy of the <see cref="Envelope"/> with a new <see cref="TransactionCorrelationId"/> </returns>
+        IEnvelope WithTransactionCorrelationId(TransactionCorrelationId correlationId);
 
         /// <summary>
-        /// Creates a new <see cref="EventEnvelope"/> with a different <see cref="EventSequenceNumber">sequence number</see>
+        /// Creates a new <see cref="Envelope"/> with a different <see cref="EventSequenceNumber">sequence number</see>
         /// </summary>
         /// <param name="sequenceNumber">The new <see cref="EventSequenceNumber"/></param>
-        /// <returns>A copy of the <see cref="EventEnvelope"/> with a new Id </returns>
-        IEventEnvelope WithSequenceNumber(EventSequenceNumber sequenceNumber);
+        /// <returns>A copy of the <see cref="Envelope"/> with a new Id </returns>
+        IEnvelope WithSequenceNumber(EventSequenceNumber sequenceNumber);
     }
 }

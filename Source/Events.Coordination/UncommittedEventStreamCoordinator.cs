@@ -22,7 +22,7 @@ namespace Dolittle.Runtime.Events.Coordination
         IEventStore _eventStore;
         IEventSourceVersions _eventSourceVersions;
         ICanSendCommittedEventStream _committedEventStreamSender;
-        IEventEnvelopes _eventEnvelopes;
+        IEnvelopes _eventEnvelopes;
         IEventSequenceNumbers _eventSequenceNumbers;
         readonly ILogger _logger;
 
@@ -32,14 +32,14 @@ namespace Dolittle.Runtime.Events.Coordination
         /// <param name="eventStore"><see cref="IEventStore"/> to use for saving the events</param>
         /// <param name="eventSourceVersions"><see cref="IEventSourceVersions"/> for working with the version for the <see cref="IEventSource"/></param>
         /// <param name="committedEventStreamSender"><see cref="ICanSendCommittedEventStream"/> send the <see cref="CommittedEventStream"/></param>
-        /// <param name="eventEnvelopes"><see cref="IEventEnvelopes"/> for working with <see cref="EventEnvelope"/></param>
+        /// <param name="eventEnvelopes"><see cref="IEnvelopes"/> for working with <see cref="Envelope"/></param>
         /// <param name="eventSequenceNumbers"><see cref="IEventSequenceNumbers"/> for allocating <see cref="EventSequenceNumber">sequence number</see> for <see cref="IEvent">events</see></param>
         /// <param name="logger"><see cref="ILogger"/> for doing logging</param>
         public UncommittedEventStreamCoordinator(
             IEventStore eventStore,
             IEventSourceVersions eventSourceVersions,
             ICanSendCommittedEventStream committedEventStreamSender,
-            IEventEnvelopes eventEnvelopes,
+            IEnvelopes eventEnvelopes,
             IEventSequenceNumbers eventSequenceNumbers,
             ILogger logger)
         {

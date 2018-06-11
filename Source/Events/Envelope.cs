@@ -10,12 +10,12 @@ using Dolittle.Runtime.Transactions;
 namespace Dolittle.Runtime.Events
 {
     /// <summary>
-    /// Represents an implementation of <see cref="IEventEnvelope"/>; the envelope for the event with all the metadata related to the event
+    /// Represents an implementation of <see cref="IEnvelope"/>; the envelope for the event with all the metadata related to the event
     /// </summary>
-    public class EventEnvelope : IEventEnvelope
+    public class Envelope : IEnvelope
     {
         /// <summary>
-        /// Initializes a new instance of <see cref="EventEnvelope"/>
+        /// Initializes a new instance of <see cref="Envelope"/>
         /// </summary>
         /// <param name="correlationId"><see cref="TransactionCorrelationId"/> the <see cref="IEvent"/> is part of</param>
         /// <param name="eventId"><see cref="EventId"/> for the <see cref="IEvent"/></param>
@@ -27,7 +27,7 @@ namespace Dolittle.Runtime.Events
         /// <param name="version"><see cref="EventSourceVersion">Version</see> of the event related to the <see cref="IEventSource"/></param>
         /// <param name="causedBy"><see cref="string"/> representing which person or what system caused the event</param>
         /// <param name="occurred"><see cref="DateTime">When</see> the event occured</param>
-        public EventEnvelope(
+        public Envelope(
             TransactionCorrelationId correlationId,
             EventId eventId,
             EventSequenceNumber sequenceNumber,
@@ -82,15 +82,15 @@ namespace Dolittle.Runtime.Events
         public DateTimeOffset Occurred { get; }
 
         /// <inheritdoc/>
-        public IEventEnvelope WithSequenceNumber(EventSequenceNumber sequenceNumber)
+        public IEnvelope WithSequenceNumber(EventSequenceNumber sequenceNumber)
         {
-            return new EventEnvelope(CorrelationId, EventId, sequenceNumber, Generation, Event, EventSourceId, EventSource, Version, CausedBy, Occurred);
+            return new Envelope(CorrelationId, EventId, sequenceNumber, Generation, Event, EventSourceId, EventSource, Version, CausedBy, Occurred);
         }
 
         /// <inheritdoc/>
-        public IEventEnvelope WithTransactionCorrelationId(TransactionCorrelationId correlationId)
+        public IEnvelope WithTransactionCorrelationId(TransactionCorrelationId correlationId)
         {
-            return new EventEnvelope(correlationId, EventId, SequenceNumber, Generation, Event, EventSourceId, EventSource, Version, CausedBy, Occurred);
+            return new Envelope(correlationId, EventId, SequenceNumber, Generation, Event, EventSourceId, EventSource, Version, CausedBy, Occurred);
         }
     }
 }

@@ -10,24 +10,24 @@ namespace Dolittle.Events.Specs.for_EventSource
     public class when_reapplying_a_stream_of_committed_events : given.a_stateful_event_source
     {
         static IEvent second_event;
-        static Mock<IEventEnvelope> second_event_envelope;
+        static Mock<IEnvelope> second_event_envelope;
         static IEvent third_event;
-        static Mock<IEventEnvelope> third_event_envelope;
+        static Mock<IEnvelope> third_event_envelope;
         static CommittedEventStream event_stream;
 
         Establish context =
             () =>
             {
                 @event = new SimpleEvent();
-                event_envelope = new Mock<IEventEnvelope>();
+                event_envelope = new Mock<IEnvelope>();
                 event_envelope.SetupGet(e => e.Version).Returns(EventSourceVersion.Zero);
 
                 second_event = new SimpleEvent();
-                second_event_envelope = new Mock<IEventEnvelope>();
+                second_event_envelope = new Mock<IEnvelope>();
                 second_event_envelope.SetupGet(e => e.Version).Returns(EventSourceVersion.Zero.NextSequence());
 
                 third_event = new SimpleEvent();
-                third_event_envelope = new Mock<IEventEnvelope>();
+                third_event_envelope = new Mock<IEnvelope>();
                 third_event_envelope.SetupGet(e => e.Version).Returns(EventSourceVersion.Zero.NextCommit().NextSequence());
 
                 event_stream = new CommittedEventStream(event_source_id,new[] {

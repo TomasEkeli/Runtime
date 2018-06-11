@@ -17,17 +17,17 @@ namespace Dolittle.Runtime.Events.Processing
         /// </summary>
         /// <param name="processor"><see cref="IEventProcessor"/> to report for</param>
         /// <param name="event"><see cref="IEvent"/> that was being processed</param>
-        /// <param name="envelope"><see cref="IEventEnvelope"/> related to the <see cref="IEvent"/> being processed</param>
+        /// <param name="envelope"><see cref="IEnvelope"/> related to the <see cref="IEvent"/> being processed</param>
         /// <param name="messages"><see cref="IEnumerable{EventProcessingMessage}">Messages</see> related to the failed processing</param>
-        void Info(IEventProcessor processor, IEvent @event, IEventEnvelope envelope, IEnumerable<EventProcessingMessage> messages);
+        void Info(IEventProcessor processor, IEvent @event, IEnvelope envelope, IEnumerable<EventProcessingMessage> messages);
 
         /// <summary>
         /// Report failure coming from an <see cref="IEventProcessor"/> with the related <see cref="IEvent"/>
         /// </summary>
         /// <param name="processor"><see cref="IEventProcessor"/> to report for</param>
         /// <param name="event"><see cref="IEvent"/> that was being processed</param>
-        /// <param name="envelope"><see cref="IEventEnvelope"/> related to the <see cref="IEvent"/> being processed</param>
+        /// <param name="envelope"><see cref="IEnvelope"/> related to the <see cref="IEvent"/> being processed</param>
         /// <param name="messages"><see cref="IEnumerable{EventProcessingMessage}">Messages</see> related to the failed processing</param>
-        void Failed(IEventProcessor processor, IEvent @event, IEventEnvelope envelope, IEnumerable<EventProcessingMessage> messages);
+        void Failed(IEventProcessor processor, IEvent @event, IEnvelope envelope, IEnumerable<EventProcessingMessage> messages);
     }
 }

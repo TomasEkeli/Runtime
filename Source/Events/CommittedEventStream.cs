@@ -31,7 +31,7 @@ namespace Dolittle.Runtime.Events
         /// Initializes a new instance of <see cref="CommittedEventStream">CommittedEventStream</see>
         /// </summary>
         /// <param name="eventSourceId">The <see cref="EventSourceId"/> of the <see cref="IEventSource"/></param>
-        /// <param name="eventsWithEnvelope">The <see cref="IEvent">events</see> with their <see cref="EventEnvelope">envelopes</see></param>
+        /// <param name="eventsWithEnvelope">The <see cref="IEvent">events</see> with their <see cref="Envelope">envelopes</see></param>
         public CommittedEventStream(EventSourceId eventSourceId, IEnumerable<EventAndEnvelope> eventsWithEnvelope)
         {
             EventSourceId = eventSourceId;

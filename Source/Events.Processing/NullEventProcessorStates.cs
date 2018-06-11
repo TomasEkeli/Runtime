@@ -27,13 +27,13 @@ namespace Dolittle.Runtime.Events.Processing
         }
 
         /// <ineritdoc/>
-        public void ReportFailureFor(IEventProcessor eventProcessor, IEvent @event, IEventEnvelope envelope)
+        public void ReportFailureFor(IEventProcessor eventProcessor, IEvent @event, IEnvelope envelope)
         {
             
         }
 
         /// <ineritdoc/>
-        public void ReportSuccessFor(IEventProcessor eventProcessor, IEvent @event, IEventEnvelope envelope)
+        public void ReportSuccessFor(IEventProcessor eventProcessor, IEvent @event, IEnvelope envelope)
         {
             
         }

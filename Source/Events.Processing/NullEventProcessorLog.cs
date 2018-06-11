@@ -15,13 +15,13 @@ namespace Dolittle.Runtime.Events.Processing
     public class NullEventProcessorLog : IEventProcessorLog
     {
         /// <inheritdoc/>
-        public void Failed(IEventProcessor processor, IEvent @event, IEventEnvelope envelope, IEnumerable<EventProcessingMessage> messages)
+        public void Failed(IEventProcessor processor, IEvent @event, IEnvelope envelope, IEnumerable<EventProcessingMessage> messages)
         {
             
         }
 
         /// <inheritdoc/>
-        public void Info(IEventProcessor processor, IEvent @event, IEventEnvelope envelope, IEnumerable<EventProcessingMessage> messages)
+        public void Info(IEventProcessor processor, IEvent @event, IEnvelope envelope, IEnumerable<EventProcessingMessage> messages)
         {
             
         }

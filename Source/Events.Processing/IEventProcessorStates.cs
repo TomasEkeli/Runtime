@@ -20,20 +20,20 @@ namespace Dolittle.Runtime.Events.Processing
 
         /// <summary>
         /// Report a successful processing for a <see cref="IEventProcessor"/> with a specific 
-        /// <see cref="IEvent"/> and its <see cref="IEventEnvelope"/>
+        /// <see cref="IEvent"/> and its <see cref="IEnvelope"/>
         /// </summary>
         /// <param name="eventProcessor"><see cref="IEventProcessor"/> to report for</param>
         /// <param name="event">The associated <see cref="IEvent"/></param>
-        /// <param name="envelope">The associated <see cref="IEventEnvelope"/></param>
-        void ReportSuccessFor(IEventProcessor eventProcessor, IEvent @event, IEventEnvelope envelope);
+        /// <param name="envelope">The associated <see cref="IEnvelope"/></param>
+        void ReportSuccessFor(IEventProcessor eventProcessor, IEvent @event, IEnvelope envelope);
 
         /// <summary>
         /// Report a failed processing for a <see cref="IEventProcessor"/> with a specific 
-        /// <see cref="IEvent"/> and its <see cref="IEventEnvelope"/>
+        /// <see cref="IEvent"/> and its <see cref="IEnvelope"/>
         /// </summary>
         /// <param name="eventProcessor"><see cref="IEventProcessor"/> to report for</param>
         /// <param name="event">The associated <see cref="IEvent"/></param>
-        /// <param name="envelope">The associated <see cref="IEventEnvelope"/></param>
-        void ReportFailureFor(IEventProcessor eventProcessor, IEvent @event, IEventEnvelope envelope);
+        /// <param name="envelope">The associated <see cref="IEnvelope"/></param>
+        void ReportFailureFor(IEventProcessor eventProcessor, IEvent @event, IEnvelope envelope);
     }
 }

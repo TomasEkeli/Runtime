@@ -10,13 +10,13 @@ namespace Dolittle.Events.Specs.for_EventSource.given
 		protected static StatefulEventSource event_source;
 		protected static EventSourceId event_source_id;
 		protected static IEvent @event;
-        protected static Mock<IEventEnvelope> event_envelope;
+        protected static Mock<IEnvelope> event_envelope;
 
 		Establish context = () =>
 				{
 					event_source_id = Guid.NewGuid();
 					event_source = new StatefulEventSource(event_source_id);
-                    event_envelope = new Mock<IEventEnvelope>();
+                    event_envelope = new Mock<IEnvelope>();
 				};
 	}
 }

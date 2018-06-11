@@ -15,7 +15,7 @@ namespace Dolittle.Runtime.Commands.Coordination.Specs.for_CommandContext.given
         protected static CommandRequest command;
         protected static CommandContext command_context;
         protected static Mock<IUncommittedEventStreamCoordinator> uncommitted_event_stream_coordinator;
-        protected static Mock<IEventEnvelopes> event_envelopes;
+        protected static Mock<IEnvelopes> event_envelopes;
 
         protected static Mock<ILogger> logger;
 
@@ -23,7 +23,7 @@ namespace Dolittle.Runtime.Commands.Coordination.Specs.for_CommandContext.given
         {
             command = new CommandRequest(TransactionCorrelationId.NotSet, Mock.Of<IApplicationArtifactIdentifier>(), new ExpandoObject());
             uncommitted_event_stream_coordinator = new Mock<IUncommittedEventStreamCoordinator>();
-            event_envelopes = new Mock<IEventEnvelopes>();
+            event_envelopes = new Mock<IEnvelopes>();
             logger = new Mock<ILogger>();
             command_context = new CommandContext(command, null, uncommitted_event_stream_coordinator.Object, logger.Object);
         };

@@ -33,12 +33,12 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
         static Mock<IApplicationArtifactIdentifier> event_source_identifier;
 
         static Mock<IEvent> first_event;
-        static IEventEnvelope first_event_envelope;
+        static IEnvelope first_event_envelope;
         static Mock<IApplicationArtifactIdentifier> first_event_identifier;
         static EventSourceVersion first_event_source_version;
 
         static Mock<IEvent> second_event;
-        static IEventEnvelope second_event_envelope;
+        static IEnvelope second_event_envelope;
         static Mock<IApplicationArtifactIdentifier> second_event_identifier;
         static EventSourceVersion second_event_source_version;
 
@@ -53,7 +53,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
             first_event_source_version = new EventSourceVersion(4, 2);
             first_event_identifier = new Mock<IApplicationArtifactIdentifier>();
             first_event = new Mock<IEvent>();
-            first_event_envelope = new EventEnvelope(
+            first_event_envelope = new Envelope(
                 TransactionCorrelationId.NotSet,
                 EventId.New(),
                 EventSequenceNumber.Zero,
@@ -71,7 +71,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
             second_event_source_version = new EventSourceVersion(4, 3);
             second_event_identifier = new Mock<IApplicationArtifactIdentifier>();
             second_event = new Mock<IEvent>();
-            second_event_envelope = new EventEnvelope(
+            second_event_envelope = new Envelope(
                 TransactionCorrelationId.NotSet,
                 EventId.New(),
                 EventSequenceNumber.Zero,
@@ -90,7 +90,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
             uncommitted_event_stream.Append(first_event.Object, first_event_source_version);
             uncommitted_event_stream.Append(second_event.Object, second_event_source_version);
 
-            event_envelopes.Setup(e => e.CreateFrom(event_source.Object, uncommitted_event_stream.EventsAndVersion)).Returns(new IEventEnvelope[]
+            event_envelopes.Setup(e => e.CreateFrom(event_source.Object, uncommitted_event_stream.EventsAndVersion)).Returns(new IEnvelope[]
             {
                 first_event_envelope,
                 second_event_envelope

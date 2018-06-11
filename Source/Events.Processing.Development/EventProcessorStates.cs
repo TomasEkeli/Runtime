@@ -61,18 +61,18 @@ namespace Dolittle.Runtime.Events.Processing.Development
         }
 
         /// <inheritdoc/>
-        public void ReportFailureFor(IEventProcessor eventProcessor, IEvent @event, IEventEnvelope envelope)
+        public void ReportFailureFor(IEventProcessor eventProcessor, IEvent @event, IEnvelope envelope)
         {
             WriteState(eventProcessor, envelope, EventProcessingStatus.Failed);
         }
 
         /// <inheritdoc/>
-        public void ReportSuccessFor(IEventProcessor eventProcessor, IEvent @event, IEventEnvelope envelope)
+        public void ReportSuccessFor(IEventProcessor eventProcessor, IEvent @event, IEnvelope envelope)
         {
             WriteState(eventProcessor, envelope, EventProcessingStatus.Success);
         }
 
-        void WriteState(IEventProcessor eventProcessor, IEventEnvelope envelope, EventProcessingStatus processingStatus)
+        void WriteState(IEventProcessor eventProcessor, IEnvelope envelope, EventProcessingStatus processingStatus)
         {
             dynamic state = new ExpandoObject();
             state.EventProcessor = eventProcessor.Identifier;

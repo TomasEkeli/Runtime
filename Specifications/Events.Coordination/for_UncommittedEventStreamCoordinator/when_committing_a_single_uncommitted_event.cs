@@ -32,7 +32,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
 
         
         static Mock<IEvent> @event;
-        static IEventEnvelope event_envelope;
+        static IEnvelope envelope;
         static Mock<IApplicationArtifactIdentifier> event_identifier;
         
 
@@ -47,7 +47,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
 
             event_identifier = new Mock<IApplicationArtifactIdentifier>();
             @event = new Mock<IEvent>();
-            event_envelope = new EventEnvelope(
+            envelope = new Envelope(
                 TransactionCorrelationId.NotSet,
                 EventId.New(),
                 EventSequenceNumber.Zero,
@@ -60,16 +60,16 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
                 DateTimeOffset.UtcNow
             );
 
-            var event_and_envelope = new EventAndEnvelope(event_envelope, @event.Object);
+            var event_and_envelope = new EventAndEnvelope(envelope, @event.Object);
 
             var eventAndVersion = new EventAndVersion(@event.Object, event_source_version);
 
             uncommitted_event_stream = new UncommittedEventStream(event_source.Object);
             uncommitted_event_stream.Append(@event.Object, event_source_version);
 
-            event_envelopes.Setup(e => e.CreateFrom(event_source.Object, uncommitted_event_stream.EventsAndVersion)).Returns(new IEventEnvelope[]
+            event_envelopes.Setup(e => e.CreateFrom(event_source.Object, uncommitted_event_stream.EventsAndVersion)).Returns(new IEnvelope[]
             {
-                event_envelope
+                envelope
             });
 
             event_store.Setup(e => e.Commit(uncommitted_events));
@@ -97,17 +97,14 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
         Because of = () => coordinator.Commit(transaction_correlation_id, uncommitted_event_stream);
 
         It should_commit_insert_event_with_correct_event_to_event_store = () => uncommitted_events.First().Event.ShouldEqual(@event.Object);
-
         It should_commit_one_event = () => uncommitted_events.Count().ShouldEqual(1);
         It should_hold_the_correct_sequence_number_when_committing = () => uncommitted_events.First().Envelope.SequenceNumber.ShouldEqual(sequence_number);
         It should_hold_the_correct_correlation_id_when_committing = () => uncommitted_events.First().Envelope.CorrelationId.ShouldEqual(transaction_correlation_id);
         It should_hold_the_correct_event_when_committing = () => uncommitted_events.First().Event.ShouldEqual(@event.Object);
-
         It should_send_one_event = () => committed_event_stream.Count.ShouldEqual(1);
         It should_hold_the_correct_sequence_number_when_sending = () => committed_event_stream.First().Envelope.SequenceNumber.ShouldEqual(sequence_number);
         It should_hold_the_correct_correlation_id_when_sending = () => committed_event_stream.First().Envelope.CorrelationId.ShouldEqual(transaction_correlation_id);
         It should_hold_the_correct_event_when_sending = () => committed_event_stream.First().Event.ShouldEqual(@event.Object);
-
         It should_commit_before_sending = () => sequence_string.ShouldEqual("12");
     }
 }

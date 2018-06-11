@@ -8,12 +8,12 @@ namespace Dolittle.Runtime.Events.Specs.for_CommittedEventStream
     public class when_creating_a_stream_with_one_event : given.an_empty_committed_event_stream
     {
         static IEvent @event;
-        static Mock<IEventEnvelope> event_envelope;
+        static Mock<IEnvelope> event_envelope;
 
         Establish context = () =>
         {
             @event = new SimpleEvent();
-            event_envelope = new Mock<IEventEnvelope>();
+            event_envelope = new Mock<IEnvelope>();
         };
 
         Because of = () => event_stream = new CommittedEventStream(event_source_id, new [] { new EventAndEnvelope(event_envelope.Object, @event) });

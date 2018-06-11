@@ -6,9 +6,9 @@ using Moq;
 
 namespace Dolittle.Runtime.Events.Specs.for_EventEnvelope.given
 {
-    public class an_event_envelope
+    public class an_envelope
     {
-        protected static IEventEnvelope event_envelope;
+        protected static IEnvelope envelope;
         protected static Mock<IApplicationArtifactIdentifier> event_identifier;
         protected static Mock<IApplicationArtifactIdentifier> event_source_identifier;
         protected static EventSourceId event_source_id;
@@ -20,7 +20,7 @@ namespace Dolittle.Runtime.Events.Specs.for_EventEnvelope.given
             event_identifier = new Mock<IApplicationArtifactIdentifier>();
             event_source_identifier = new Mock<IApplicationArtifactIdentifier>();
             version = EventSourceVersion.Zero;
-            event_envelope = new EventEnvelope(
+            envelope = new Envelope(
                 TransactionCorrelationId.NotSet,
                 EventId.New(),
                 EventSequenceNumber.Zero,
