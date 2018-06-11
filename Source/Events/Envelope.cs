@@ -30,7 +30,7 @@ namespace Dolittle.Runtime.Events
         public Envelope(
             TransactionCorrelationId correlationId,
             EventId eventId,
-            EventSequenceNumber sequenceNumber,
+            SequenceNumber sequenceNumber,
             EventGeneration generation, 
             IApplicationArtifactIdentifier @event, 
             EventSourceId eventSourceId, 
@@ -58,7 +58,7 @@ namespace Dolittle.Runtime.Events
         public EventId EventId { get; }
 
         /// <inheritdoc/>
-        public EventSequenceNumber SequenceNumber { get; }
+        public SequenceNumber SequenceNumber { get; }
 
         /// <inheritdoc/>
         public EventGeneration Generation { get; }
@@ -82,7 +82,7 @@ namespace Dolittle.Runtime.Events
         public DateTimeOffset Occurred { get; }
 
         /// <inheritdoc/>
-        public IEnvelope WithSequenceNumber(EventSequenceNumber sequenceNumber)
+        public IEnvelope WithSequenceNumber(SequenceNumber sequenceNumber)
         {
             return new Envelope(CorrelationId, EventId, sequenceNumber, Generation, Event, EventSourceId, EventSource, Version, CausedBy, Occurred);
         }

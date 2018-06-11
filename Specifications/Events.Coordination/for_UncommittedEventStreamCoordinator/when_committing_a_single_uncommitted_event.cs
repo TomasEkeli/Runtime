@@ -13,8 +13,8 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
     [Subject(typeof(UncommittedEventStreamCoordinator))]
     public class when_committing_a_single_uncommitted_event : given.an_uncommitted_event_stream_coordinator
     {
-        static EventSequenceNumber sequence_number = 42L;
-        static EventSequenceNumber sequence_number_for_type = 43L;
+        static SequenceNumber sequence_number = 42L;
+        static SequenceNumber sequence_number_for_type = 43L;
 
         static string sequence_string = string.Empty;
 
@@ -50,7 +50,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
             envelope = new Envelope(
                 TransactionCorrelationId.NotSet,
                 EventId.New(),
-                EventSequenceNumber.Zero,
+                SequenceNumber.Zero,
                 EventGeneration.First,
                 event_identifier.Object,
                 event_source_id,

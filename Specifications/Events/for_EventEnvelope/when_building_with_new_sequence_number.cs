@@ -4,7 +4,7 @@ namespace Dolittle.Runtime.Events.Specs.for_EventEnvelope
 {
     public class when_building_with_new_sequence_number : given.an_envelope
     {
-        static EventSequenceNumber new_sequence_number;
+        static SequenceNumber new_sequence_number;
         static IEnvelope result;
 
         Establish context = () => new_sequence_number = 42L;

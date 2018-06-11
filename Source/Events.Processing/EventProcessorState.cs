@@ -18,15 +18,15 @@ namespace Dolittle.Runtime.Events.Processing
         /// <param name="eventProcessor"><see cref="IEventProcessor"/> the state is for</param>
         /// <param name="status"><see cref="EventProcessorStatus">Status</see> of the <see cref="IEventProcessor"/></param>
         /// <param name="lastProcessed">When processed last</param>
-        /// <param name="lastProcessedSequenceNumber">Last <see cref="EventSequenceNumber"/></param>
-        /// <param name="lastProcessedSequenceNumberForEventType">Last <see cref="EventSequenceNumber"/> for the <see cref="IEvent">event type</see></param>
+        /// <param name="lastProcessedSequenceNumber">Last <see cref="SequenceNumber"/></param>
+        /// <param name="lastProcessedSequenceNumberForEventType">Last <see cref="SequenceNumber"/> for the <see cref="IEvent">event type</see></param>
         /// <param name="lastProcessingStatus"><see cref="EventProcessingStatus"/> of the processing</param>
         public EventProcessorState(
             IEventProcessor eventProcessor,
             EventProcessorStatus status,
             DateTimeOffset lastProcessed,
-            EventSequenceNumber lastProcessedSequenceNumber,
-            EventSequenceNumber lastProcessedSequenceNumberForEventType,
+            SequenceNumber lastProcessedSequenceNumber,
+            SequenceNumber lastProcessedSequenceNumberForEventType,
             EventProcessingStatus lastProcessingStatus)
         {
             Status = status;
@@ -47,10 +47,10 @@ namespace Dolittle.Runtime.Events.Processing
         public DateTimeOffset LastProcessed { get; }
 
         /// <inheritdoc/>
-        public EventSequenceNumber LastProcessedSequenceNumber { get; }
+        public SequenceNumber LastProcessedSequenceNumber { get; }
 
         /// <inheritdoc/>
-        public EventSequenceNumber LastProcessedSequenceNumberForEventType { get; }
+        public SequenceNumber LastProcessedSequenceNumberForEventType { get; }
 
         /// <inheritdoc/>
         public EventProcessingStatus LastProcessingStatus { get; }

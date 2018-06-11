@@ -24,14 +24,14 @@ namespace Dolittle.Runtime.Events.Processing
 
 
         /// <summary>
-        /// Gets the <see cref="EventSequenceNumber"/> from the global sequence number of the last <see cref="IEvent"/> that was processed 
+        /// Gets the <see cref="SequenceNumber"/> from the global sequence number of the last <see cref="IEvent"/> that was processed 
         /// </summary>
-        EventSequenceNumber LastProcessedSequenceNumber { get; }
+        SequenceNumber LastProcessedSequenceNumber { get; }
 
         /// <summary>
-        /// Gets the <see cref="EventSequenceNumber"/> of the last <see cref="IEvent"/> that was processed of the given type
+        /// Gets the <see cref="SequenceNumber"/> of the last <see cref="IEvent"/> that was processed of the given type
         /// </summary>
-        EventSequenceNumber LastProcessedSequenceNumberForEventType { get; }
+        SequenceNumber LastProcessedSequenceNumberForEventType { get; }
 
         /// <summary>
         /// Gets the <see cref="DateTimeOffset"/> of the last <see cref="IEvent"/> that was processed

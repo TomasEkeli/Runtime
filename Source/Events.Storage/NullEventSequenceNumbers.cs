@@ -7,18 +7,18 @@ using Dolittle.Applications;
 namespace Dolittle.Runtime.Events.Storage
 {
     /// <summary>
-    /// Represents a null implementation of <see cref="IEventSequenceNumbers"/>
+    /// Represents a null implementation of <see cref="ISequenceNumbers"/>
     /// </summary>
-    public class NullEventSequenceNumbers : IEventSequenceNumbers
+    public class NullSequenceNumbers : ISequenceNumbers
     {
         /// <inheritdoc/>
-        public EventSequenceNumber Next()
+        public SequenceNumber Next()
         {
             return 0L;
         }
 
         /// <inheritdoc/>
-        public EventSequenceNumber NextForType(IApplicationArtifactIdentifier identifier)
+        public SequenceNumber NextForType(IApplicationArtifactIdentifier identifier)
         {
             return 0L;
         }

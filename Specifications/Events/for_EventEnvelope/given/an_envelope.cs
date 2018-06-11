@@ -23,7 +23,7 @@ namespace Dolittle.Runtime.Events.Specs.for_EventEnvelope.given
             envelope = new Envelope(
                 TransactionCorrelationId.NotSet,
                 EventId.New(),
-                EventSequenceNumber.Zero,
+                SequenceNumber.Zero,
                 EventGeneration.First,
                 event_identifier.Object,
                 event_source_id,

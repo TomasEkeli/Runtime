@@ -11,10 +11,10 @@ using Dolittle.Logging;
 namespace Dolittle.Runtime.Events.Storage.Development
 {
     /// <summary>
-    /// Represents a simple and naïve implementation of <see cref="IEventSequenceNumbers"/>
+    /// Represents a simple and naïve implementation of <see cref="ISequenceNumbers"/>
     /// </summary>
     [Singleton]
-    public class EventSequenceNumbers : IEventSequenceNumbers
+    public class EventSequenceNumbers : ISequenceNumbers
     {
         const string SequenceFileName = "sequence";
         const string SequenceForPrefix = "sequence_for_";
@@ -44,7 +44,7 @@ namespace Dolittle.Runtime.Events.Storage.Development
 
 
         /// <inheritdoc/>
-        public EventSequenceNumber Next()
+        public SequenceNumber Next()
         {
             lock( _globalSequenceLock )
             {
@@ -55,7 +55,7 @@ namespace Dolittle.Runtime.Events.Storage.Development
         }
 
         /// <inheritdoc/>
-        public EventSequenceNumber NextForType(IApplicationArtifactIdentifier identifier)
+        public SequenceNumber NextForType(IApplicationArtifactIdentifier identifier)
         {
             var hashCode = identifier.GetHashCode();
             lock( _sequenceLocksPerType )

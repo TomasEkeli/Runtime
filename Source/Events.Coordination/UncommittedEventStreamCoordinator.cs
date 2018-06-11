@@ -23,7 +23,7 @@ namespace Dolittle.Runtime.Events.Coordination
         IEventSourceVersions _eventSourceVersions;
         ICanSendCommittedEventStream _committedEventStreamSender;
         IEnvelopes _eventEnvelopes;
-        IEventSequenceNumbers _eventSequenceNumbers;
+        ISequenceNumbers _sequenceNumbers;
         readonly ILogger _logger;
 
         /// <summary>
@@ -33,21 +33,21 @@ namespace Dolittle.Runtime.Events.Coordination
         /// <param name="eventSourceVersions"><see cref="IEventSourceVersions"/> for working with the version for the <see cref="IEventSource"/></param>
         /// <param name="committedEventStreamSender"><see cref="ICanSendCommittedEventStream"/> send the <see cref="CommittedEventStream"/></param>
         /// <param name="eventEnvelopes"><see cref="IEnvelopes"/> for working with <see cref="Envelope"/></param>
-        /// <param name="eventSequenceNumbers"><see cref="IEventSequenceNumbers"/> for allocating <see cref="EventSequenceNumber">sequence number</see> for <see cref="IEvent">events</see></param>
+        /// <param name="sequenceNumbers"><see cref="ISequenceNumbers"/> for allocating <see cref="SequenceNumber">sequence number</see> for <see cref="IEvent">events</see></param>
         /// <param name="logger"><see cref="ILogger"/> for doing logging</param>
         public UncommittedEventStreamCoordinator(
             IEventStore eventStore,
             IEventSourceVersions eventSourceVersions,
             ICanSendCommittedEventStream committedEventStreamSender,
             IEnvelopes eventEnvelopes,
-            IEventSequenceNumbers eventSequenceNumbers,
+            ISequenceNumbers sequenceNumbers,
             ILogger logger)
         {
             _eventStore = eventStore;
             _eventSourceVersions = eventSourceVersions;
             _committedEventStreamSender = committedEventStreamSender;
             _eventEnvelopes = eventEnvelopes;
-            _eventSequenceNumbers = eventSequenceNumbers;
+            _sequenceNumbers = sequenceNumbers;
             _logger = logger;
         }
 
@@ -68,7 +68,7 @@ namespace Dolittle.Runtime.Events.Coordination
                 eventsAndEnvelopes.Add(new EventAndEnvelope(
                     envelope
                         .WithTransactionCorrelationId(correlationId)
-                        .WithSequenceNumber(_eventSequenceNumbers.Next()),
+                        .WithSequenceNumber(_sequenceNumbers.Next()),
                     @event
                 ));
             }

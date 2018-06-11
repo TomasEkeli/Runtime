@@ -10,20 +10,20 @@ namespace Dolittle.Runtime.Events
     /// <summary>
     /// Represents the identification of an <see cref="IEvent"/>
     /// </summary>
-    public class EventSequenceNumber : ConceptAs<long>
+    public class SequenceNumber : ConceptAs<ulong>
     {
         /// <summary>
         /// Represents a null Event - EventId *MUST* start with 1
         /// </summary>
-        public static EventSequenceNumber Zero = 0L;
+        public static SequenceNumber Zero = 0L;
 
         /// <summary>
-        /// Implicitly convert from a <see cref="long"/> to an <see cref="EventSequenceNumber"/>
+        /// Implicitly convert from a <see cref="ulong"/> to an <see cref="SequenceNumber"/>
         /// </summary>
-        /// <param name="eventSequenceNumber">Actual sequence number</param>
-        public static implicit operator EventSequenceNumber(long eventSequenceNumber)
+        /// <param name="sequenceNumber">Actual sequence number</param>
+        public static implicit operator SequenceNumber(ulong sequenceNumber)
         {
-            return new EventSequenceNumber { Value = eventSequenceNumber };
+            return new SequenceNumber { Value = sequenceNumber };
         }
     }
 }

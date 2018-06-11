@@ -20,8 +20,8 @@ namespace Dolittle.Runtime.Events.Processing
                     eventProcessor,
                     EventProcessorStatus.Online,
                     DateTimeOffset.MaxValue,
-                    EventSequenceNumber.Zero,
-                    EventSequenceNumber.Zero,
+                    SequenceNumber.Zero,
+                    SequenceNumber.Zero,
                     EventProcessingStatus.Success
                 );
         }

@@ -13,11 +13,11 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
     [Subject(typeof(UncommittedEventStreamCoordinator))]
     public class when_committing_two_uncommitted_events : given.an_uncommitted_event_stream_coordinator
     {
-        static EventSequenceNumber first_event_sequence_number = 42L;
-        static EventSequenceNumber first_event_sequence_number_for_type = 43L;
+        static SequenceNumber first_event_sequence_number = 42L;
+        static SequenceNumber first_event_sequence_number_for_type = 43L;
 
-        static EventSequenceNumber second_event_sequence_number = 44L;
-        static EventSequenceNumber second_event_sequence_number_for_type = 45L;
+        static SequenceNumber second_event_sequence_number = 44L;
+        static SequenceNumber second_event_sequence_number_for_type = 45L;
 
         static string sequence_string = string.Empty;
 
@@ -56,7 +56,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
             first_event_envelope = new Envelope(
                 TransactionCorrelationId.NotSet,
                 EventId.New(),
-                EventSequenceNumber.Zero,
+                SequenceNumber.Zero,
                 EventGeneration.First,
                 first_event_identifier.Object,
                 event_source_id,
@@ -74,7 +74,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
             second_event_envelope = new Envelope(
                 TransactionCorrelationId.NotSet,
                 EventId.New(),
-                EventSequenceNumber.Zero,
+                SequenceNumber.Zero,
                 EventGeneration.First,
                 first_event_identifier.Object,
                 event_source_id,

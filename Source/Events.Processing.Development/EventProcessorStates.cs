@@ -53,8 +53,8 @@ namespace Dolittle.Runtime.Events.Processing.Development
                 eventProcessor, 
                 EventProcessorStatus.Online,
                 DateTimeOffset.MinValue, 
-                EventSequenceNumber.Zero,
-                EventSequenceNumber.Zero, 
+                SequenceNumber.Zero,
+                SequenceNumber.Zero, 
                 EventProcessingStatus.Success);
             _serializer.FromJson(eventProcessorState, json);
             return eventProcessorState;

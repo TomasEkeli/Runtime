@@ -27,7 +27,7 @@ namespace Dolittle.Runtime.Events
         /// <summary>
         /// Gets the global sequence number used in the event store
         /// </summary>
-        EventSequenceNumber SequenceNumber { get; }
+        SequenceNumber SequenceNumber { get; }
 
         /// <summary>
         /// Gets the <see cref="EventGeneration"/> for the <see cref="IEvent"/>
@@ -74,10 +74,10 @@ namespace Dolittle.Runtime.Events
         IEnvelope WithTransactionCorrelationId(TransactionCorrelationId correlationId);
 
         /// <summary>
-        /// Creates a new <see cref="Envelope"/> with a different <see cref="EventSequenceNumber">sequence number</see>
+        /// Creates a new <see cref="Envelope"/> with a different <see cref="Events.SequenceNumber">sequence number</see>
         /// </summary>
-        /// <param name="sequenceNumber">The new <see cref="EventSequenceNumber"/></param>
+        /// <param name="sequenceNumber">The new <see cref="Events.SequenceNumber"/></param>
         /// <returns>A copy of the <see cref="Envelope"/> with a new Id </returns>
-        IEnvelope WithSequenceNumber(EventSequenceNumber sequenceNumber);
+        IEnvelope WithSequenceNumber(SequenceNumber sequenceNumber);
     }
 }
