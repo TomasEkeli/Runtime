@@ -51,7 +51,6 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
                 TransactionCorrelationId.NotSet,
                 EventId.New(),
                 EventSequenceNumber.Zero,
-                EventSequenceNumber.Zero,
                 EventGeneration.First,
                 event_identifier.Object,
                 event_source_id,
@@ -101,13 +100,11 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
 
         It should_commit_one_event = () => uncommitted_events.Count().ShouldEqual(1);
         It should_hold_the_correct_sequence_number_when_committing = () => uncommitted_events.First().Envelope.SequenceNumber.ShouldEqual(sequence_number);
-        It should_hold_the_correct_sequence_number_for_event_type_when_committing = () => uncommitted_events.First().Envelope.SequenceNumberForEventType.ShouldEqual(sequence_number_for_type);
         It should_hold_the_correct_correlation_id_when_committing = () => uncommitted_events.First().Envelope.CorrelationId.ShouldEqual(transaction_correlation_id);
         It should_hold_the_correct_event_when_committing = () => uncommitted_events.First().Event.ShouldEqual(@event.Object);
 
         It should_send_one_event = () => committed_event_stream.Count.ShouldEqual(1);
         It should_hold_the_correct_sequence_number_when_sending = () => committed_event_stream.First().Envelope.SequenceNumber.ShouldEqual(sequence_number);
-        It should_hold_the_correct_sequence_number_for_event_type_when_sending = () => committed_event_stream.First().Envelope.SequenceNumberForEventType.ShouldEqual(sequence_number_for_type);
         It should_hold_the_correct_correlation_id_when_sending = () => committed_event_stream.First().Envelope.CorrelationId.ShouldEqual(transaction_correlation_id);
         It should_hold_the_correct_event_when_sending = () => committed_event_stream.First().Event.ShouldEqual(@event.Object);
 

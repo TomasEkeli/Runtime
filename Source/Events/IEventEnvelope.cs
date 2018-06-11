@@ -30,12 +30,6 @@ namespace Dolittle.Runtime.Events
         EventSequenceNumber SequenceNumber { get; }
 
         /// <summary>
-        /// Gets the global sequence number for the specific <see cref="IEvent">event type</see>
-        /// </summary>
-        EventSequenceNumber SequenceNumberForEventType { get; }
-
-
-        /// <summary>
         /// Gets the <see cref="EventGeneration"/> for the <see cref="IEvent"/>
         /// </summary>
         EventGeneration Generation { get; }
@@ -85,12 +79,5 @@ namespace Dolittle.Runtime.Events
         /// <param name="sequenceNumber">The new <see cref="EventSequenceNumber"/></param>
         /// <returns>A copy of the <see cref="EventEnvelope"/> with a new Id </returns>
         IEventEnvelope WithSequenceNumber(EventSequenceNumber sequenceNumber);
-
-        /// <summary>
-        /// Creates a new <see cref="EventEnvelope"/> with a different <see cref="EventSequenceNumber">sequence number</see> for the <see cref="IEvent">event type</see>
-        /// </summary>
-        /// <param name="sequenceNumber">The new <see cref="EventSequenceNumber"/></param>
-        /// <returns>A copy of the <see cref="EventEnvelope"/> with a new Id </returns>
-        IEventEnvelope WithSequenceNumberForEventType(EventSequenceNumber sequenceNumber);
     }
 }

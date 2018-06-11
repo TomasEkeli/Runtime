@@ -24,7 +24,6 @@ namespace Dolittle.Runtime.Events.Specs.for_EventEnvelope.given
                 TransactionCorrelationId.NotSet,
                 EventId.New(),
                 EventSequenceNumber.Zero,
-                EventSequenceNumber.Zero,
                 EventGeneration.First,
                 event_identifier.Object,
                 event_source_id,

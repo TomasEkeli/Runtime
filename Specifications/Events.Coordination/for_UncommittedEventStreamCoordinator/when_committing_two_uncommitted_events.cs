@@ -57,7 +57,6 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
                 TransactionCorrelationId.NotSet,
                 EventId.New(),
                 EventSequenceNumber.Zero,
-                EventSequenceNumber.Zero,
                 EventGeneration.First,
                 first_event_identifier.Object,
                 event_source_id,
@@ -75,7 +74,6 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
             second_event_envelope = new EventEnvelope(
                 TransactionCorrelationId.NotSet,
                 EventId.New(),
-                EventSequenceNumber.Zero,
                 EventSequenceNumber.Zero,
                 EventGeneration.First,
                 first_event_identifier.Object,
@@ -129,23 +127,19 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
         It should_commit_two_events = ()=> uncommitted_events.Count().ShouldEqual(2);
         It should_hold_the_correct_correlation_id_for_first_event_when_committing = ()=> uncommitted_events.ToArray()[0].Envelope.CorrelationId.ShouldEqual(transaction_correlation_id);
         It should_hold_the_correct_sequence_number_for_first_event_when_committing = ()=> uncommitted_events.ToArray()[0].Envelope.SequenceNumber.ShouldEqual(first_event_sequence_number);
-        It should_hold_the_correct_sequence_number_for_event_type_for_first_event_when_committing = ()=> uncommitted_events.ToArray()[0].Envelope.SequenceNumberForEventType.ShouldEqual(first_event_sequence_number_for_type);
         It should_hold_the_correct_event_for_first_event_when_committing = ()=> uncommitted_events.ToArray()[0].Event.ShouldEqual(first_event.Object);
 
         It should_hold_the_correct_correlation_id_for_second_event_when_committing = ()=> uncommitted_events.ToArray()[1].Envelope.CorrelationId.ShouldEqual(transaction_correlation_id);
         It should_hold_the_correct_sequence_number_for_second_event_when_committing = ()=> uncommitted_events.ToArray()[1].Envelope.SequenceNumber.ShouldEqual(second_event_sequence_number);
-        It should_hold_the_correct_sequence_number_for_event_type_for_second_event_when_committing = ()=> uncommitted_events.ToArray()[1].Envelope.SequenceNumberForEventType.ShouldEqual(second_event_sequence_number_for_type);
         It should_hold_the_correct_event_for_second_event_when_committing = ()=> uncommitted_events.ToArray()[1].Event.ShouldEqual(second_event.Object);
 
         It should_send_two_events = ()=> committed_event_stream.Count.ShouldEqual(2);
         It should_hold_the_correct_correlation_id_for_first_event_when_sending = ()=> committed_event_stream.ToArray()[0].Envelope.CorrelationId.ShouldEqual(transaction_correlation_id);
         It should_hold_the_correct_sequence_number_for_first_event_when_sending = ()=> committed_event_stream.ToArray()[0].Envelope.SequenceNumber.ShouldEqual(first_event_sequence_number);
-        It should_hold_the_correct_sequence_number_for_event_type_for_first_event_when_sending = ()=> committed_event_stream.ToArray()[0].Envelope.SequenceNumberForEventType.ShouldEqual(first_event_sequence_number_for_type);
         It should_hold_the_correct_event_for_first_event_when_sending = ()=> committed_event_stream.ToArray()[0].Event.ShouldEqual(first_event.Object);
 
         It should_hold_the_correct_correlation_id_for_second_event_when_sending = ()=> committed_event_stream.ToArray()[1].Envelope.CorrelationId.ShouldEqual(transaction_correlation_id);
         It should_hold_the_correct_sequence_number_for_second_event_when_sending = ()=> committed_event_stream.ToArray()[1].Envelope.SequenceNumber.ShouldEqual(second_event_sequence_number);
-        It should_hold_the_correct_sequence_number_for_event_type_for_second_event_when_sending = ()=> committed_event_stream.ToArray()[1].Envelope.SequenceNumberForEventType.ShouldEqual(second_event_sequence_number_for_type);
         It should_hold_the_correct_event_for_second_event_when_sending = ()=> committed_event_stream.ToArray()[1].Event.ShouldEqual(second_event.Object);
 
         It should_commit_before_sending = ()=> sequence_string.ShouldEqual("12");

@@ -20,7 +20,6 @@ namespace Dolittle.Runtime.Events
         /// <param name="correlationId"><see cref="TransactionCorrelationId"/> the <see cref="IEvent"/> is part of</param>
         /// <param name="eventId"><see cref="EventId"/> for the <see cref="IEvent"/></param>
         /// <param name="sequenceNumber"></param>
-        /// <param name="sequenceNumberForEventType"></param>
         /// <param name="generation"><see cref="EventGeneration"/> for the <see cref="IEvent"/> </param>
         /// <param name="event"><see cref="IApplicationArtifactIdentifier"/> representing the <see cref="IEvent"/></param>
         /// <param name="eventSourceId"><see cref="EventSourceId"/> for the <see cref="IEventSource"/></param>
@@ -32,7 +31,6 @@ namespace Dolittle.Runtime.Events
             TransactionCorrelationId correlationId,
             EventId eventId,
             EventSequenceNumber sequenceNumber,
-            EventSequenceNumber sequenceNumberForEventType,
             EventGeneration generation, 
             IApplicationArtifactIdentifier @event, 
             EventSourceId eventSourceId, 
@@ -44,7 +42,6 @@ namespace Dolittle.Runtime.Events
             CorrelationId = correlationId;
             EventId = eventId;
             SequenceNumber = sequenceNumber;
-            SequenceNumberForEventType = sequenceNumberForEventType;
             Generation = generation;
             Event = @event;
             EventSourceId = eventSourceId;
@@ -62,9 +59,6 @@ namespace Dolittle.Runtime.Events
 
         /// <inheritdoc/>
         public EventSequenceNumber SequenceNumber { get; }
-
-        /// <inheritdoc/>
-        public EventSequenceNumber SequenceNumberForEventType { get; }
 
         /// <inheritdoc/>
         public EventGeneration Generation { get; }
@@ -90,19 +84,13 @@ namespace Dolittle.Runtime.Events
         /// <inheritdoc/>
         public IEventEnvelope WithSequenceNumber(EventSequenceNumber sequenceNumber)
         {
-            return new EventEnvelope(CorrelationId, EventId, sequenceNumber, SequenceNumberForEventType, Generation, Event, EventSourceId, EventSource, Version, CausedBy, Occurred);
-        }
-
-        /// <inheritdoc/>
-        public IEventEnvelope WithSequenceNumberForEventType(EventSequenceNumber sequenceNumberForEventType)
-        {
-            return new EventEnvelope(CorrelationId, EventId, SequenceNumber, sequenceNumberForEventType, Generation, Event, EventSourceId, EventSource, Version, CausedBy, Occurred);
+            return new EventEnvelope(CorrelationId, EventId, sequenceNumber, Generation, Event, EventSourceId, EventSource, Version, CausedBy, Occurred);
         }
 
         /// <inheritdoc/>
         public IEventEnvelope WithTransactionCorrelationId(TransactionCorrelationId correlationId)
         {
-            return new EventEnvelope(correlationId, EventId, SequenceNumber, SequenceNumberForEventType, Generation, Event, EventSourceId, EventSource, Version, CausedBy, Occurred);
+            return new EventEnvelope(correlationId, EventId, SequenceNumber, Generation, Event, EventSourceId, EventSource, Version, CausedBy, Occurred);
         }
     }
 }

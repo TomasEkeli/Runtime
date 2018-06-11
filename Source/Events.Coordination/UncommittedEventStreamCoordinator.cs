@@ -68,8 +68,7 @@ namespace Dolittle.Runtime.Events.Coordination
                 eventsAndEnvelopes.Add(new EventAndEnvelope(
                     envelope
                         .WithTransactionCorrelationId(correlationId)
-                        .WithSequenceNumber(_eventSequenceNumbers.Next())
-                        .WithSequenceNumberForEventType(_eventSequenceNumbers.NextForType(envelope.Event)),
+                        .WithSequenceNumber(_eventSequenceNumbers.Next()),
                     @event
                 ));
             }
