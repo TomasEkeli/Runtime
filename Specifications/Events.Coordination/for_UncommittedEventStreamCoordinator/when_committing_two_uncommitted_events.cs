@@ -110,7 +110,6 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
             var sequence = 0;
             var sequence_for_types = 0;
             event_sequence_numbers.Setup(e => e.Next()).Returns(()=> numbers[sequence++]);
-            event_sequence_numbers.Setup(e => e.NextForType(Moq.It.IsAny<IApplicationArtifactIdentifier>())).Returns(()=> numbers_for_types[sequence_for_types++]);
 
             committed_event_stream_sender.Setup(e => e.Send(Moq.It.IsAny<CommittedEventStream>()))
                 .Callback((CommittedEventStream c)=>

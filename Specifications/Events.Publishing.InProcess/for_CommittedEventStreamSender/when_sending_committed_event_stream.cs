@@ -5,11 +5,11 @@ using It = Machine.Specifications.It;
 
 namespace Dolittle.Runtime.Events.Publishing.InProcess.Specs.for_CommittedEventStreamSender
 {
-    public class when_sending_comitted_event_stream : given.a_committed_event_stream_sender
+    public class when_sending_committed_event_stream : given.a_committed_event_stream_sender
     {
         protected static CommittedEventStream committed_event_stream;
 
-        Establish context = () => committed_event_stream = new CommittedEventStream(Guid.NewGuid());
+        Establish context = () => committed_event_stream = new CommittedEventStream(Guid.NewGuid(), new Letter[0]);
 
         Because of = () => committed_event_stream_sender.Send(committed_event_stream);
 

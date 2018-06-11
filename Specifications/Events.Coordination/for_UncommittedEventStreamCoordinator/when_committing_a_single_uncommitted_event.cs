@@ -14,7 +14,6 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
     public class when_committing_a_single_uncommitted_event : given.an_uncommitted_event_stream_coordinator
     {
         static SequenceNumber sequence_number = 42L;
-        static SequenceNumber sequence_number_for_type = 43L;
 
         static string sequence_string = string.Empty;
 
@@ -82,7 +81,6 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
                 });
 
             event_sequence_numbers.Setup(e => e.Next()).Returns(sequence_number);
-            event_sequence_numbers.Setup(e => e.NextForType(event_identifier.Object)).Returns(sequence_number_for_type);
 
             committed_event_stream_sender.Setup(e => e.Send(Moq.It.IsAny<CommittedEventStream>()))
                 .Callback((CommittedEventStream c) =>

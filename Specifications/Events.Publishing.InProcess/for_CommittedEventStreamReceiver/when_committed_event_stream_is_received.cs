@@ -10,7 +10,7 @@ namespace Dolittle.Runtime.Events.Publishing.InProcess.Specs.for_CommittedEventS
 
         Establish context = () =>
         {
-            committed_event_stream = new CommittedEventStream(Guid.NewGuid());
+            committed_event_stream = new CommittedEventStream(Guid.NewGuid(), new Letter[0]);
             committed_event_stream_receiver.Received += c => received_committed_event_stream = c;
         };
 
