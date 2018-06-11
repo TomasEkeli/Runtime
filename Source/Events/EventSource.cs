@@ -105,13 +105,13 @@ namespace Dolittle.Events
         void ThrowIfStateful()
         {
             if (!this.IsStateless())
-                throw new InvalidFastForwardException("Cannot fast forward stateful event source");
+                throw new InvalidFastForwardOfEventSource("Cannot fast forward stateful event source");
         }
 
         void ThrowIfNotInitialVersion()
         {
             if (!Version.Equals(EventSourceVersion.Zero))
-                throw new InvalidFastForwardException("Cannot fast forward event source that is not an initial version");
+                throw new InvalidFastForwardOfEventSource("Cannot fast forward event source that is not an initial version");
         }
     }
 }
