@@ -27,6 +27,6 @@ namespace Dolittle.Runtime.Events.Storage
         /// <param name="eventSource"><see cref="IEventSource"/> to create from</param>
         /// <param name="eventsAndVersion"><see cref="IEnumerable{EventAndVersion}">Events and version</see> to create from</param>
         /// <returns><see cref="IEnumerable{IEnvelope}">Event envelopes</see></returns>
-        IEnumerable<IEnvelope> CreateFrom(IEventSource eventSource, IEnumerable<EventAndVersion> eventsAndVersion);
+        IEnumerable<IEnvelope> CreateFrom(IEventSource eventSource, IEnumerable<VersionedEvent> eventsAndVersion);
     }
 }

@@ -62,12 +62,12 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
 
             var event_and_envelope = new Letter(envelope, @event.Object);
 
-            var eventAndVersion = new EventAndVersion(@event.Object, event_source_version);
+            var eventAndVersion = new VersionedEvent(@event.Object, event_source_version);
 
             uncommitted_event_stream = new UncommittedEventStream(event_source.Object);
             uncommitted_event_stream.Append(@event.Object, event_source_version);
 
-            event_envelopes.Setup(e => e.CreateFrom(event_source.Object, uncommitted_event_stream.EventsAndVersion)).Returns(new IEnvelope[]
+            event_envelopes.Setup(e => e.CreateFrom(event_source.Object, uncommitted_event_stream.VersionedEvents)).Returns(new IEnvelope[]
             {
                 envelope
             });

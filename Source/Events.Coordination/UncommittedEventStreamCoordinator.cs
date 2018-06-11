@@ -22,7 +22,7 @@ namespace Dolittle.Runtime.Events.Coordination
         IEventStore _eventStore;
         IEventSourceVersions _eventSourceVersions;
         ICanSendCommittedEventStream _committedEventStreamSender;
-        IEnvelopes _eventEnvelopes;
+        IEnvelopes _envelopes;
         ISequenceNumbers _sequenceNumbers;
         readonly ILogger _logger;
 
@@ -46,7 +46,7 @@ namespace Dolittle.Runtime.Events.Coordination
             _eventStore = eventStore;
             _eventSourceVersions = eventSourceVersions;
             _committedEventStreamSender = committedEventStreamSender;
-            _eventEnvelopes = eventEnvelopes;
+            _envelopes = eventEnvelopes;
             _sequenceNumbers = sequenceNumbers;
             _logger = logger;
         }
@@ -55,7 +55,7 @@ namespace Dolittle.Runtime.Events.Coordination
         public void Commit(TransactionCorrelationId correlationId, UncommittedEventStream uncommittedEventStream)
         {
             _logger.Information($"Committing uncommitted event stream with correlationId '{correlationId}'");
-            var envelopes = _eventEnvelopes.CreateFrom(uncommittedEventStream.EventSource, uncommittedEventStream.EventsAndVersion);
+            var envelopes = _envelopes.CreateFrom(uncommittedEventStream.EventSource, uncommittedEventStream.VersionedEvents);
             var envelopesAsArray = envelopes.ToArray();
             var eventsAsArray = uncommittedEventStream.ToArray();
 

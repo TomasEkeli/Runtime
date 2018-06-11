@@ -66,7 +66,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
                 DateTimeOffset.UtcNow
             );
             var first_event_and_envelope = new Letter(first_event_envelope, first_event.Object);
-            var first_event_and_version = new EventAndVersion(first_event.Object, first_event_source_version);
+            var first_event_and_version = new VersionedEvent(first_event.Object, first_event_source_version);
 
             second_event_source_version = new EventSourceVersion(4, 3);
             second_event_identifier = new Mock<IApplicationArtifactIdentifier>();
@@ -84,13 +84,13 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
                 DateTimeOffset.UtcNow
             );
             var second_event_and_envelope = new Letter(second_event_envelope, second_event.Object);
-            var second_event_and_version = new EventAndVersion(second_event.Object, second_event_source_version);
+            var second_event_and_version = new VersionedEvent(second_event.Object, second_event_source_version);
 
             uncommitted_event_stream = new UncommittedEventStream(event_source.Object);
             uncommitted_event_stream.Append(first_event.Object, first_event_source_version);
             uncommitted_event_stream.Append(second_event.Object, second_event_source_version);
 
-            event_envelopes.Setup(e => e.CreateFrom(event_source.Object, uncommitted_event_stream.EventsAndVersion)).Returns(new IEnvelope[]
+            event_envelopes.Setup(e => e.CreateFrom(event_source.Object, uncommitted_event_stream.VersionedEvents)).Returns(new IEnvelope[]
             {
                 first_event_envelope,
                 second_event_envelope
