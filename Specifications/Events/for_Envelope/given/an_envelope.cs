@@ -4,7 +4,7 @@ using Dolittle.Runtime.Transactions;
 using Machine.Specifications;
 using Moq;
 
-namespace Dolittle.Runtime.Events.Specs.for_EventEnvelope.given
+namespace Dolittle.Runtime.Events.Specs.for_Envelope.given
 {
     public class an_envelope
     {

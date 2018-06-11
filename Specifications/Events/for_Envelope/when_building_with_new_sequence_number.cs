@@ -1,6 +1,6 @@
 ﻿using Machine.Specifications;
 
-namespace Dolittle.Runtime.Events.Specs.for_EventEnvelope
+namespace Dolittle.Runtime.Events.Specs.for_Envelope
 {
     public class when_building_with_new_sequence_number : given.an_envelope
     {
