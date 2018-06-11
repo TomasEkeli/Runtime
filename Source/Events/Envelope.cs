@@ -20,7 +20,7 @@ namespace Dolittle.Runtime.Events
         /// <param name="correlationId"><see cref="TransactionCorrelationId"/> the <see cref="IEvent"/> is part of</param>
         /// <param name="eventId"><see cref="EventId"/> for the <see cref="IEvent"/></param>
         /// <param name="sequenceNumber"></param>
-        /// <param name="generation"><see cref="EventGeneration"/> for the <see cref="IEvent"/> </param>
+        /// <param name="generation"><see cref="GenerationOfEvent"/> for the <see cref="IEvent"/> </param>
         /// <param name="event"><see cref="IApplicationArtifactIdentifier"/> representing the <see cref="IEvent"/></param>
         /// <param name="eventSourceId"><see cref="EventSourceId"/> for the <see cref="IEventSource"/></param>
         /// <param name="eventSource"><see cref="IApplicationArtifactIdentifier"/> representing the <see cref="IEventSource"/></param>
@@ -31,7 +31,7 @@ namespace Dolittle.Runtime.Events
             TransactionCorrelationId correlationId,
             EventId eventId,
             SequenceNumber sequenceNumber,
-            EventGeneration generation, 
+            GenerationOfEvent generation, 
             IApplicationArtifactIdentifier @event, 
             EventSourceId eventSourceId, 
             IApplicationArtifactIdentifier eventSource, 
@@ -61,7 +61,7 @@ namespace Dolittle.Runtime.Events
         public SequenceNumber SequenceNumber { get; }
 
         /// <inheritdoc/>
-        public EventGeneration Generation { get; }
+        public GenerationOfEvent Generation { get; }
 
         /// <inheritdoc/>
         public IApplicationArtifactIdentifier Event { get; }
