@@ -12,7 +12,7 @@ namespace Dolittle.Runtime.Commands.Validation.Specs.for_CommandValidators
         static CommandRequest   command;
         static CommandValidationResult result;
 
-        Establish context = () => command = new CommandRequest(TransactionCorrelationId.NotSet, Mock.Of<IApplicationArtifactIdentifier>(), new ExpandoObject());
+        Establish context = () => command = new CommandRequest(CorrelationId.NotSet, Mock.Of<IApplicationArtifactIdentifier>(), new ExpandoObject());
 
         Because of = () => result = validators.Validate(command);
 

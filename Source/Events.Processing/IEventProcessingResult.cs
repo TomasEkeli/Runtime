@@ -14,9 +14,9 @@ namespace Dolittle.Runtime.Events.Processing
     public interface IEventProcessingResult
     {
         /// <summary>
-        /// Gets the <see cref="TransactionCorrelationId"/> for 
+        /// Gets the <see cref="CorrelationId"/> for 
         /// </summary>
-        TransactionCorrelationId CorrelationId { get; }
+        CorrelationId CorrelationId { get; }
 
         /// <summary>
         /// Gets the <see cref="IEventProcessor"/> the result is coming from

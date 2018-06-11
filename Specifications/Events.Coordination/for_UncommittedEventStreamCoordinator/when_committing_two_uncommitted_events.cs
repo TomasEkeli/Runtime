@@ -21,7 +21,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
 
         static string sequence_string = string.Empty;
 
-        static TransactionCorrelationId transaction_correlation_id;
+        static CorrelationId transaction_correlation_id;
 
         static IEnumerable<Letter> uncommitted_events;
         static UncommittedEventStream uncommitted_event_stream;
@@ -54,7 +54,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
             first_event_identifier = new Mock<IApplicationArtifactIdentifier>();
             first_event = new Mock<IEvent>();
             first_event_envelope = new Envelope(
-                TransactionCorrelationId.NotSet,
+                CorrelationId.NotSet,
                 EventId.New(),
                 SequenceNumber.Zero,
                 GenerationOfEvent.First,
@@ -72,7 +72,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
             second_event_identifier = new Mock<IApplicationArtifactIdentifier>();
             second_event = new Mock<IEvent>();
             second_event_envelope = new Envelope(
-                TransactionCorrelationId.NotSet,
+                CorrelationId.NotSet,
                 EventId.New(),
                 SequenceNumber.Zero,
                 GenerationOfEvent.First,

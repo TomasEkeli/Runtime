@@ -15,10 +15,10 @@ namespace Dolittle.Runtime.Events.Coordination
         /// Commit a <see cref="UncommittedEventStream"/>
         /// </summary>
         /// <param name="correlationId">
-        /// The <see cref="TransactionCorrelationId"/> related to the <see cref="ITransaction"/> 
+        /// The <see cref="CorrelationId"/> related to the <see cref="ITransaction"/> 
         /// the <see cref="UncommittedEventStream"/> was generated in
         /// </param>
         /// <param name="eventStream"><see cref="UncommittedEventStream"/> to commit</param>
-        void Commit(TransactionCorrelationId correlationId, UncommittedEventStream eventStream);
+        void Commit(CorrelationId correlationId, UncommittedEventStream eventStream);
     }
 }

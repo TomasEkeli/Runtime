@@ -16,7 +16,7 @@ namespace Dolittle.Runtime.Commands.Specs.for_CommandHandlerManager
 
         Because of = () =>
                          {
-                             handled_command = new CommandRequest(TransactionCorrelationId.NotSet, Mock.Of<IApplicationArtifactIdentifier>(), new ExpandoObject());
+                             handled_command = new CommandRequest(CorrelationId.NotSet, Mock.Of<IApplicationArtifactIdentifier>(), new ExpandoObject());
                              thrown_exception = Catch.Exception(() => manager.Handle(handled_command));
                          };
 

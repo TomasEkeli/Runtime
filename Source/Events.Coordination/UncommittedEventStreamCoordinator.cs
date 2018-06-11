@@ -52,7 +52,7 @@ namespace Dolittle.Runtime.Events.Coordination
         }
 
         /// <inheritdoc/>
-        public void Commit(TransactionCorrelationId correlationId, UncommittedEventStream uncommittedEventStream)
+        public void Commit(CorrelationId correlationId, UncommittedEventStream uncommittedEventStream)
         {
             _logger.Information($"Committing uncommitted event stream with correlationId '{correlationId}'");
             var envelopes = _envelopes.CreateFrom(uncommittedEventStream.EventSource, uncommittedEventStream.VersionedEvents);
@@ -67,7 +67,7 @@ namespace Dolittle.Runtime.Events.Coordination
                 var @event = eventsAsArray[eventIndex];
                 letters.Add(new Letter(
                     envelope
-                        .WithTransactionCorrelationId(correlationId)
+                        .WithCorrelationId(correlationId)
                         .WithSequenceNumber(_sequenceNumbers.Next()),
                     @event
                 ));

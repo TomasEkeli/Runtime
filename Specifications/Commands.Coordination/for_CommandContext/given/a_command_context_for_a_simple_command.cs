@@ -21,7 +21,7 @@ namespace Dolittle.Runtime.Commands.Coordination.Specs.for_CommandContext.given
 
         Establish context = () =>
         {
-            command = new CommandRequest(TransactionCorrelationId.NotSet, Mock.Of<IApplicationArtifactIdentifier>(), new ExpandoObject());
+            command = new CommandRequest(CorrelationId.NotSet, Mock.Of<IApplicationArtifactIdentifier>(), new ExpandoObject());
             uncommitted_event_stream_coordinator = new Mock<IUncommittedEventStreamCoordinator>();
             event_envelopes = new Mock<IEnvelopes>();
             logger = new Mock<ILogger>();

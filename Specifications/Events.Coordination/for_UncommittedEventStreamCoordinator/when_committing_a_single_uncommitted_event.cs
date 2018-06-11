@@ -17,7 +17,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
 
         static string sequence_string = string.Empty;
 
-        static TransactionCorrelationId transaction_correlation_id;
+        static CorrelationId transaction_correlation_id;
 
         static Mock<IEventSource> event_source;
         static EventSourceId event_source_id = Guid.NewGuid();
@@ -47,7 +47,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
             event_identifier = new Mock<IApplicationArtifactIdentifier>();
             @event = new Mock<IEvent>();
             envelope = new Envelope(
-                TransactionCorrelationId.NotSet,
+                CorrelationId.NotSet,
                 EventId.New(),
                 SequenceNumber.Zero,
                 GenerationOfEvent.First,

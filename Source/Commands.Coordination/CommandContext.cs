@@ -43,12 +43,12 @@ namespace Dolittle.Runtime.Commands.Coordination
             _logger = logger;
 
             // This should be exposed to the client somehow - maybe even coming from the client
-            TransactionCorrelationId = Guid.NewGuid();
+            CorrelationId = Guid.NewGuid();
         }
 
 
         /// <inheritdoc/>
-        public TransactionCorrelationId TransactionCorrelationId { get; }
+        public CorrelationId CorrelationId { get; }
 
         /// <inheritdoc/>
         public CommandRequest Command { get; }
@@ -89,7 +89,7 @@ namespace Dolittle.Runtime.Commands.Coordination
                 if (events.HasEvents)
                 {
                     _logger.Trace("Events present - send them to uncommitted eventstream coordinator");
-                    _uncommittedEventStreamCoordinator.Commit(TransactionCorrelationId, events);
+                    _uncommittedEventStreamCoordinator.Commit(CorrelationId, events);
                     _logger.Trace("Commit object");
                     trackedObject.Commit();
                 }

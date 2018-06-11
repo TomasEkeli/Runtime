@@ -17,7 +17,7 @@ namespace Dolittle.Runtime.Events
         /// <summary>
         /// Initializes a new instance of <see cref="Envelope"/>
         /// </summary>
-        /// <param name="correlationId"><see cref="TransactionCorrelationId"/> the <see cref="IEvent"/> is part of</param>
+        /// <param name="correlationId"><see cref="CorrelationId"/> the <see cref="IEvent"/> is part of</param>
         /// <param name="eventId"><see cref="EventId"/> for the <see cref="IEvent"/></param>
         /// <param name="sequenceNumber"></param>
         /// <param name="generation"><see cref="GenerationOfEvent"/> for the <see cref="IEvent"/> </param>
@@ -28,7 +28,7 @@ namespace Dolittle.Runtime.Events
         /// <param name="causedBy"><see cref="string"/> representing which person or what system caused the event</param>
         /// <param name="occurred"><see cref="DateTime">When</see> the event occured</param>
         public Envelope(
-            TransactionCorrelationId correlationId,
+            CorrelationId correlationId,
             EventId eventId,
             SequenceNumber sequenceNumber,
             GenerationOfEvent generation, 
@@ -52,7 +52,7 @@ namespace Dolittle.Runtime.Events
         }
 
         /// <inheritdoc/>
-        public TransactionCorrelationId CorrelationId { get; }
+        public CorrelationId CorrelationId { get; }
 
         /// <inheritdoc/>
         public EventId EventId { get; }
@@ -88,7 +88,7 @@ namespace Dolittle.Runtime.Events
         }
 
         /// <inheritdoc/>
-        public IEnvelope WithTransactionCorrelationId(TransactionCorrelationId correlationId)
+        public IEnvelope WithCorrelationId(CorrelationId correlationId)
         {
             return new Envelope(correlationId, EventId, SequenceNumber, Generation, Event, EventSourceId, EventSource, Version, CausedBy, Occurred);
         }

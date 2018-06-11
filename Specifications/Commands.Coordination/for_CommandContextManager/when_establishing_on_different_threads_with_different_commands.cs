@@ -17,7 +17,7 @@ namespace Dolittle.Runtime.Commands.Coordination.Specs.for_CommandContextManager
 
         Establish context = () =>
                                 {
-                                    command = new CommandRequest(TransactionCorrelationId.NotSet, Mock.Of<IApplicationArtifactIdentifier>(), new ExpandoObject());
+                                    command = new CommandRequest(CorrelationId.NotSet, Mock.Of<IApplicationArtifactIdentifier>(), new ExpandoObject());
                                     var resetEvent = new ManualResetEvent(false);
                                     firstCommandContext = Manager.EstablishForCommand(command);
                                     var thread = new Thread(

@@ -10,29 +10,29 @@ namespace Dolittle.Runtime.Transactions
     /// <summary>
     /// Represents a uniquely identifiable correlation id associated with a transaction
     /// </summary>
-    public class TransactionCorrelationId : ConceptAs<Guid>
+    public class CorrelationId : ConceptAs<Guid>
     {
         /// <summary>
-        /// Creates a new instance of <see cref="TransactionCorrelationId"/> with a unique id
+        /// Creates a new instance of <see cref="CorrelationId"/> with a unique id
         /// </summary>
-        /// <returns>A new <see cref="TransactionCorrelationId"/></returns>
-        public static TransactionCorrelationId New()
+        /// <returns>A new <see cref="CorrelationId"/></returns>
+        public static CorrelationId New()
         {
-            return new TransactionCorrelationId { Value = Guid.NewGuid() };
+            return new CorrelationId { Value = Guid.NewGuid() };
         }
 
         /// <summary>
-        /// Gets the value representing a not set <see cref="TransactionCorrelationId"/>
+        /// Gets the value representing a not set <see cref="CorrelationId"/>
         /// </summary>
-        public static TransactionCorrelationId NotSet = Guid.Empty;
+        public static CorrelationId NotSet = Guid.Empty;
 
         /// <summary>
-        /// Implicitly convert from a <see cref="Guid"/> to a <see cref="TransactionCorrelationId"/>
+        /// Implicitly convert from a <see cref="Guid"/> to a <see cref="CorrelationId"/>
         /// </summary>
         /// <param name="value"><see cref="Guid"/> for the value</param>
-        public static implicit operator TransactionCorrelationId(Guid value)
+        public static implicit operator CorrelationId(Guid value)
         {
-            return new TransactionCorrelationId { Value = value };
+            return new CorrelationId { Value = value };
         }
     }
 }

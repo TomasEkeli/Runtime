@@ -21,7 +21,7 @@ namespace Dolittle.Runtime.Events.Specs.for_Envelope.given
             event_source_identifier = new Mock<IApplicationArtifactIdentifier>();
             version = EventSourceVersion.Zero;
             envelope = new Envelope(
-                TransactionCorrelationId.NotSet,
+                CorrelationId.NotSet,
                 EventId.New(),
                 SequenceNumber.Zero,
                 GenerationOfEvent.First,
