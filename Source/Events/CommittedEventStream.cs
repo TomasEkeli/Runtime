@@ -17,25 +17,16 @@ namespace Dolittle.Runtime.Events
     {
         List<Letter> _events = new List<Letter>();
 
-        /// <summary>
-        /// Initializes a new instance of <see cref="CommittedEventStream">CommittedEventStream</see>
-        /// </summary>
-        /// <param name="eventSourceId">The <see cref="EventSourceId"/> of the <see cref="IEventSource"/></param>
-        public CommittedEventStream(EventSourceId eventSourceId)
-        {
-            EventSourceId = eventSourceId;
-        }
-
 
         /// <summary>
         /// Initializes a new instance of <see cref="CommittedEventStream">CommittedEventStream</see>
         /// </summary>
         /// <param name="eventSourceId">The <see cref="EventSourceId"/> of the <see cref="IEventSource"/></param>
-        /// <param name="eventsWithEnvelope">The <see cref="IEvent">events</see> with their <see cref="Envelope">envelopes</see></param>
-        public CommittedEventStream(EventSourceId eventSourceId, IEnumerable<Letter> eventsWithEnvelope)
+        /// <param name="letters">The <see cref="IEvent">events</see> with their <see cref="Envelope">envelopes</see></param>
+        public CommittedEventStream(EventSourceId eventSourceId, IEnumerable<Letter> letters)
         {
             EventSourceId = eventSourceId;
-            foreach (var eventAndEnvelope in eventsWithEnvelope)
+            foreach (var eventAndEnvelope in letters)
             {
                 EnsureEventIsValid(eventAndEnvelope);
                 _events.Add(eventAndEnvelope);
@@ -77,9 +68,9 @@ namespace Dolittle.Runtime.Events
             return GetEnumerator();
         }
 
-        void EnsureEventIsValid(Letter eventAndEnvelope)
+        void EnsureEventIsValid(Letter letter)
         {
-            if (eventAndEnvelope.Contents == null)
+            if (letter.Contents == null)
                 throw new ArgumentNullException("Cannot append a null event");
         }
     }

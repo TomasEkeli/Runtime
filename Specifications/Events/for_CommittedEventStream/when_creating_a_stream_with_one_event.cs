@@ -2,13 +2,16 @@
 using Moq;
 using It = Machine.Specifications.It;
 using Dolittle.Events;
+using System;
 
 namespace Dolittle.Runtime.Events.Specs.for_CommittedEventStream
 {
-    public class when_creating_a_stream_with_one_event : given.an_empty_committed_event_stream
+    public class when_creating_a_stream_with_one_event 
     {
         static IEvent @event;
+        static CommittedEventStream event_stream;
         static Mock<IEnvelope> envelope;
+        static EventSourceId event_source_id = Guid.NewGuid();
 
         Establish context = () =>
         {
