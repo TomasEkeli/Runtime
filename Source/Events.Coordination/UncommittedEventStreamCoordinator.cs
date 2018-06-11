@@ -60,12 +60,12 @@ namespace Dolittle.Runtime.Events.Coordination
             var eventsAsArray = uncommittedEventStream.ToArray();
 
             _logger.Trace("Create an array of events and envelopes");
-            var eventsAndEnvelopes = new List<EventAndEnvelope>();
+            var letters = new List<Letter>();
             for( var eventIndex=0; eventIndex<eventsAsArray.Length; eventIndex++ )
             {
                 var envelope = envelopesAsArray[eventIndex];
                 var @event = eventsAsArray[eventIndex];
-                eventsAndEnvelopes.Add(new EventAndEnvelope(
+                letters.Add(new Letter(
                     envelope
                         .WithTransactionCorrelationId(correlationId)
                         .WithSequenceNumber(_sequenceNumbers.Next()),
@@ -74,13 +74,13 @@ namespace Dolittle.Runtime.Events.Coordination
             }
 
             _logger.Trace("Committing events to event store");
-            _eventStore.Commit(eventsAndEnvelopes);
+            _eventStore.Commit(letters);
 
             _logger.Trace($"Set event source versions for the event source '{envelopesAsArray[0].EventSource}' with id '{envelopesAsArray[0].EventSourceId}'");
             _eventSourceVersions.SetFor(envelopesAsArray[0].EventSource, envelopesAsArray[0].EventSourceId, envelopesAsArray[envelopesAsArray.Length - 1].Version);
 
             _logger.Trace("Create a committed event stream");
-            var committedEventStream = new CommittedEventStream(uncommittedEventStream.EventSourceId, eventsAndEnvelopes);
+            var committedEventStream = new CommittedEventStream(uncommittedEventStream.EventSourceId, letters);
 
             _logger.Trace("Send the committed event stream");
             _committedEventStreamSender.Send(committedEventStream);

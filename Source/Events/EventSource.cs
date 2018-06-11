@@ -46,7 +46,7 @@ namespace Dolittle.Events
 
             foreach (var eventAndEnvelope in eventStream)
             {
-                InvokeOnMethod(eventAndEnvelope.Event);
+                InvokeOnMethod(eventAndEnvelope.Contents);
                 Version = eventAndEnvelope.Envelope.Version;
             }
 

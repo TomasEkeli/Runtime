@@ -60,25 +60,25 @@ namespace Dolittle.Runtime.Events.Coordination
             {
                 _logger.Trace("Event received");
                
-                var results = _eventProcessors.Process(e.Envelope, e.Event);
+                var results = _eventProcessors.Process(e.Envelope, e.Contents);
                 Parallel.ForEach(results, result =>
                 {
                     if (result.Status == EventProcessingStatus.Success)
                     {
                         _logger.Trace("Event processing succeeded");
-                        _eventProcessorStates.ReportSuccessFor(result.EventProcessor, e.Event, e.Envelope);
+                        _eventProcessorStates.ReportSuccessFor(result.EventProcessor, e.Contents, e.Envelope);
 
                         if( result.Messages.Count() > 0 )
                         {
                             result.Messages.ForEach(message => _logger.Trace($"Event processor message : '{message.Message}' with severity '{message.Severity}'"));
-                            _eventProcessorLog.Info(result.EventProcessor, e.Event, e.Envelope, result.Messages);
+                            _eventProcessorLog.Info(result.EventProcessor, e.Contents, e.Envelope, result.Messages);
                         }
                     }
                     else
                     {
                         _logger.Trace("Event processing failed");
-                        _eventProcessorStates.ReportFailureFor(result.EventProcessor, e.Event, e.Envelope);
-                        _eventProcessorLog.Failed(result.EventProcessor, e.Event, e.Envelope, result.Messages);
+                        _eventProcessorStates.ReportFailureFor(result.EventProcessor, e.Contents, e.Envelope);
+                        _eventProcessorLog.Failed(result.EventProcessor, e.Contents, e.Envelope, result.Messages);
                     }
                 });
             });

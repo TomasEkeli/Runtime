@@ -19,7 +19,7 @@ namespace Dolittle.Runtime.Events.Storage
         /// <param name="eventSource"><see cref="IApplicationArtifactIdentifier">Identifier</see> representing the <see cref="IEventSource"/> to get <see cref="IEvent">events</see> for</param>
         /// <param name="eventSourceId"><see cref="EventSourceId"/> identifying the <see cref="IEventSource"/></param>
 		/// <returns>All events for the aggregated root in an Event Stream</returns>
-        IEnumerable<EventAndEnvelope> GetFor(IApplicationArtifactIdentifier eventSource, EventSourceId eventSourceId);
+        IEnumerable<Letter> GetFor(IApplicationArtifactIdentifier eventSource, EventSourceId eventSourceId);
 
         /// <summary>
         /// Check if there are <see cref="IEvent">events</see> for <see cref="IEventSource"/>
@@ -41,6 +41,6 @@ namespace Dolittle.Runtime.Events.Storage
         /// Save events for a specific aggregated root
         /// </summary>
         /// <param name="eventsAndEnvelopes"><see cref="IEnumerable{T}">Events and envelopes</see> to commit</param>
-        void Commit(IEnumerable<EventAndEnvelope> eventsAndEnvelopes);
+        void Commit(IEnumerable<Letter> eventsAndEnvelopes);
 	}
 }

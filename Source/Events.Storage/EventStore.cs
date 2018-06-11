@@ -33,24 +33,24 @@ namespace Dolittle.Runtime.Events.Storage
         }
 
         /// <inheritdoc/>
-        public void Commit(IEnumerable<EventAndEnvelope> eventsAndEnvelopes)
+        public void Commit(IEnumerable<Letter> letters)
         {
             var context = new EventStorageContext();
 
-            eventsAndEnvelopes.ForEach(_ =>
+            letters.ForEach(_ =>
             {
                 var paths = _paths.GetForContext(_.Envelope.EventSourceId);
                 paths.ForEach(path =>
                 {
                     var stream = _storage.GetAppendStreamFor(path);
                     _serializer.ToProtobuf(_.Envelope, stream, includeLength: true);
-                    _serializer.ToProtobuf(_.Event, stream, includeLength: true);
+                    _serializer.ToProtobuf(_.Contents, stream, includeLength: true);
                 });
             });
         }
 
         /// <inheritdoc/>
-        public IEnumerable<EventAndEnvelope> GetFor(IApplicationArtifactIdentifier eventSource, EventSourceId eventSourceId)
+        public IEnumerable<Letter> GetFor(IApplicationArtifactIdentifier eventSource, EventSourceId eventSourceId)
         {
             throw new System.NotImplementedException();
         }

@@ -13,9 +13,9 @@ namespace Dolittle.Runtime.Events
     /// Represents a special version of an eventstream
     /// that holds committed <see cref="IEvent">events</see>
     /// </summary>
-    public class CommittedEventStream : IEnumerable<EventAndEnvelope>
+    public class CommittedEventStream : IEnumerable<Letter>
     {
-        List<EventAndEnvelope> _events = new List<EventAndEnvelope>();
+        List<Letter> _events = new List<Letter>();
 
         /// <summary>
         /// Initializes a new instance of <see cref="CommittedEventStream">CommittedEventStream</see>
@@ -32,7 +32,7 @@ namespace Dolittle.Runtime.Events
         /// </summary>
         /// <param name="eventSourceId">The <see cref="EventSourceId"/> of the <see cref="IEventSource"/></param>
         /// <param name="eventsWithEnvelope">The <see cref="IEvent">events</see> with their <see cref="Envelope">envelopes</see></param>
-        public CommittedEventStream(EventSourceId eventSourceId, IEnumerable<EventAndEnvelope> eventsWithEnvelope)
+        public CommittedEventStream(EventSourceId eventSourceId, IEnumerable<Letter> eventsWithEnvelope)
         {
             EventSourceId = eventSourceId;
             foreach (var eventAndEnvelope in eventsWithEnvelope)
@@ -67,7 +67,7 @@ namespace Dolittle.Runtime.Events
         /// Get a generic enumerator to iterate over the events
         /// </summary>
         /// <returns>Enumerator</returns>
-        public IEnumerator<EventAndEnvelope> GetEnumerator()
+        public IEnumerator<Letter> GetEnumerator()
         {
             return _events.GetEnumerator();
         }
@@ -77,9 +77,9 @@ namespace Dolittle.Runtime.Events
             return GetEnumerator();
         }
 
-        void EnsureEventIsValid(EventAndEnvelope eventAndEnvelope)
+        void EnsureEventIsValid(Letter eventAndEnvelope)
         {
-            if (eventAndEnvelope.Event == null)
+            if (eventAndEnvelope.Contents == null)
                 throw new ArgumentNullException("Cannot append a null event");
         }
     }

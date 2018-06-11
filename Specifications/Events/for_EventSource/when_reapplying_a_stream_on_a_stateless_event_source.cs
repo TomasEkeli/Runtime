@@ -11,7 +11,7 @@ namespace Dolittle.Events.Specs.for_EventSource
         static CommittedEventStream event_stream;
         static Exception exception;
 
-        Establish context = () => event_stream = new CommittedEventStream(event_source_id, new[] { new EventAndEnvelope(new Mock<IEnvelope>().Object, new SimpleEvent()) });
+        Establish context = () => event_stream = new CommittedEventStream(event_source_id, new[] { new Letter(new Mock<IEnvelope>().Object, new SimpleEvent()) });
 
         Because of = () => exception = Catch.Exception(() => event_source.ReApply(event_stream));
 

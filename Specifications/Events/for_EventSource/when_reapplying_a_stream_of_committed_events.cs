@@ -31,9 +31,9 @@ namespace Dolittle.Events.Specs.for_EventSource
                 third_event_envelope.SetupGet(e => e.Version).Returns(EventSourceVersion.Zero.NextCommit().NextSequence());
 
                 event_stream = new CommittedEventStream(event_source_id,new[] {
-                    new EventAndEnvelope(event_envelope.Object, @event),
-                    new EventAndEnvelope(second_event_envelope.Object, second_event),
-                    new EventAndEnvelope(third_event_envelope.Object, third_event),
+                    new Letter(event_envelope.Object, @event),
+                    new Letter(second_event_envelope.Object, second_event),
+                    new Letter(third_event_envelope.Object, third_event),
                 });
             };
 

@@ -23,7 +23,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
 
         static TransactionCorrelationId transaction_correlation_id;
 
-        static IEnumerable<EventAndEnvelope> uncommitted_events;
+        static IEnumerable<Letter> uncommitted_events;
         static UncommittedEventStream uncommitted_event_stream;
 
         static CommittedEventStream committed_event_stream;
@@ -65,7 +65,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
                 CausedBy.Unknown,
                 DateTimeOffset.UtcNow
             );
-            var first_event_and_envelope = new EventAndEnvelope(first_event_envelope, first_event.Object);
+            var first_event_and_envelope = new Letter(first_event_envelope, first_event.Object);
             var first_event_and_version = new EventAndVersion(first_event.Object, first_event_source_version);
 
             second_event_source_version = new EventSourceVersion(4, 3);
@@ -83,7 +83,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
                 CausedBy.Unknown,
                 DateTimeOffset.UtcNow
             );
-            var second_event_and_envelope = new EventAndEnvelope(second_event_envelope, second_event.Object);
+            var second_event_and_envelope = new Letter(second_event_envelope, second_event.Object);
             var second_event_and_version = new EventAndVersion(second_event.Object, second_event_source_version);
 
             uncommitted_event_stream = new UncommittedEventStream(event_source.Object);
@@ -98,8 +98,8 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
 
             event_store.Setup(e => e.Commit(uncommitted_events));
 
-            event_store.Setup(e => e.Commit(Moq.It.IsAny<IEnumerable<EventAndEnvelope>>())).Callback(
-                (IEnumerable<EventAndEnvelope> e)=>
+            event_store.Setup(e => e.Commit(Moq.It.IsAny<IEnumerable<Letter>>())).Callback(
+                (IEnumerable<Letter> e)=>
                 {
                     uncommitted_events = e;
                     sequence_string = sequence_string + "1";
@@ -122,25 +122,25 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
 
         Because of = ()=> coordinator.Commit(transaction_correlation_id, uncommitted_event_stream);
 
-        It should_commit_insert_event_with_correct_event_to_event_store = ()=> uncommitted_events.First().Event.ShouldEqual(first_event.Object);
+        It should_commit_insert_event_with_correct_event_to_event_store = ()=> uncommitted_events.First().Contents.ShouldEqual(first_event.Object);
 
         It should_commit_two_events = ()=> uncommitted_events.Count().ShouldEqual(2);
         It should_hold_the_correct_correlation_id_for_first_event_when_committing = ()=> uncommitted_events.ToArray()[0].Envelope.CorrelationId.ShouldEqual(transaction_correlation_id);
         It should_hold_the_correct_sequence_number_for_first_event_when_committing = ()=> uncommitted_events.ToArray()[0].Envelope.SequenceNumber.ShouldEqual(first_event_sequence_number);
-        It should_hold_the_correct_event_for_first_event_when_committing = ()=> uncommitted_events.ToArray()[0].Event.ShouldEqual(first_event.Object);
+        It should_hold_the_correct_event_for_first_event_when_committing = ()=> uncommitted_events.ToArray()[0].Contents.ShouldEqual(first_event.Object);
 
         It should_hold_the_correct_correlation_id_for_second_event_when_committing = ()=> uncommitted_events.ToArray()[1].Envelope.CorrelationId.ShouldEqual(transaction_correlation_id);
         It should_hold_the_correct_sequence_number_for_second_event_when_committing = ()=> uncommitted_events.ToArray()[1].Envelope.SequenceNumber.ShouldEqual(second_event_sequence_number);
-        It should_hold_the_correct_event_for_second_event_when_committing = ()=> uncommitted_events.ToArray()[1].Event.ShouldEqual(second_event.Object);
+        It should_hold_the_correct_event_for_second_event_when_committing = ()=> uncommitted_events.ToArray()[1].Contents.ShouldEqual(second_event.Object);
 
         It should_send_two_events = ()=> committed_event_stream.Count.ShouldEqual(2);
         It should_hold_the_correct_correlation_id_for_first_event_when_sending = ()=> committed_event_stream.ToArray()[0].Envelope.CorrelationId.ShouldEqual(transaction_correlation_id);
         It should_hold_the_correct_sequence_number_for_first_event_when_sending = ()=> committed_event_stream.ToArray()[0].Envelope.SequenceNumber.ShouldEqual(first_event_sequence_number);
-        It should_hold_the_correct_event_for_first_event_when_sending = ()=> committed_event_stream.ToArray()[0].Event.ShouldEqual(first_event.Object);
+        It should_hold_the_correct_event_for_first_event_when_sending = ()=> committed_event_stream.ToArray()[0].Contents.ShouldEqual(first_event.Object);
 
         It should_hold_the_correct_correlation_id_for_second_event_when_sending = ()=> committed_event_stream.ToArray()[1].Envelope.CorrelationId.ShouldEqual(transaction_correlation_id);
         It should_hold_the_correct_sequence_number_for_second_event_when_sending = ()=> committed_event_stream.ToArray()[1].Envelope.SequenceNumber.ShouldEqual(second_event_sequence_number);
-        It should_hold_the_correct_event_for_second_event_when_sending = ()=> committed_event_stream.ToArray()[1].Event.ShouldEqual(second_event.Object);
+        It should_hold_the_correct_event_for_second_event_when_sending = ()=> committed_event_stream.ToArray()[1].Contents.ShouldEqual(second_event.Object);
 
         It should_commit_before_sending = ()=> sequence_string.ShouldEqual("12");
     }

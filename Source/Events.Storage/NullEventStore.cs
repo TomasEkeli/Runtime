@@ -13,13 +13,13 @@ namespace Dolittle.Runtime.Events.Storage
     public class NullEventStore : IEventStore
     {
         /// <inheritdoc/>
-        public IEnumerable<EventAndEnvelope> GetFor(IApplicationArtifactIdentifier eventSource, EventSourceId eventSourceId)
+        public IEnumerable<Letter> GetFor(IApplicationArtifactIdentifier eventSource, EventSourceId eventSourceId)
         {
-            return new EventAndEnvelope[0];
+            return new Letter[0];
         }
 
         /// <inheritdoc/>
-        public void Commit(IEnumerable<EventAndEnvelope> eventsAndEnvelopes)
+        public void Commit(IEnumerable<Letter> eventsAndEnvelopes)
         {
         }
 
