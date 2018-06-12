@@ -23,7 +23,7 @@ namespace Dolittle.Events
         }
 
         /// <inheritdoc/>
-        public EventSourceId EventSourceId { get; set; }
+        public EventSourceId EventSourceId { get; private set; }
 
         /// <inheritdoc/>
         public EventSourceVersion Version { get; private set; }
