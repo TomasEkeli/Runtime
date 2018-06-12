@@ -14,10 +14,8 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
     public class when_committing_two_uncommitted_events : given.an_uncommitted_event_stream_coordinator
     {
         static SequenceNumber first_event_sequence_number = 42L;
-        static SequenceNumber first_event_sequence_number_for_type = 43L;
 
         static SequenceNumber second_event_sequence_number = 44L;
-        static SequenceNumber second_event_sequence_number_for_type = 45L;
 
         static string sequence_string = string.Empty;
 
@@ -106,9 +104,7 @@ namespace Dolittle.Runtime.Events.Coordination.Specs.for_UncommittedEventStreamC
                 });
 
             var numbers = new [] { first_event_sequence_number, second_event_sequence_number };
-            var numbers_for_types = new [] { first_event_sequence_number_for_type, second_event_sequence_number_for_type };
             var sequence = 0;
-            var sequence_for_types = 0;
             event_sequence_numbers.Setup(e => e.Next()).Returns(()=> numbers[sequence++]);
 
             committed_event_stream_sender.Setup(e => e.Send(Moq.It.IsAny<CommittedEventStream>()))

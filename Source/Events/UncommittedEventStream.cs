@@ -15,7 +15,7 @@ namespace Dolittle.Runtime.Events
     public class UncommittedEventStream : IEnumerable<IEvent>
     {
         List<IEvent> _events = new List<IEvent>();
-        List<VersionedEvent> _eventsAndVersion = new List<VersionedEvent>();
+        List<VersionedEvent> _versionedEvents = new List<VersionedEvent>();
 
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Dolittle.Runtime.Events
         /// <summary>
         /// Gets the <see cref="IEvent">events</see> with the associated <see cref="EventSourceVersion">version</see>
         /// </summary>
-        public IEnumerable<VersionedEvent> VersionedEvents => _eventsAndVersion;
+        public IEnumerable<VersionedEvent> VersionedEvents => _versionedEvents;
 
         /// <summary>
         /// Indicates whether there are any events in the Stream.
@@ -67,7 +67,7 @@ namespace Dolittle.Runtime.Events
         {
             ThrowIfEventIsNull(@event);
             _events.Add(@event);
-            _eventsAndVersion.Add(new VersionedEvent(@event, version));
+            _versionedEvents.Add(new VersionedEvent(@event, version));
         }
 
         /// <inerhitdoc/>

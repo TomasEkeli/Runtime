@@ -86,4 +86,24 @@ namespace Dolittle.Runtime.Events.Coordination
             _committedEventStreamSender.Send(committedEventStream);
         }
     }
+
+    public class LetterFactory : ILetterFactory
+    {
+        ///<inheritdoc/>
+        public IEnumerable<Letter> BuildFrom(CorrelationId correlationId, UncommittedEventStream uncommittedEventStream)
+        {
+            return null;
+        }
+    }
+
+    public interface ILetterFactory
+    {
+        /// <summary>
+        /// Builds <see cref="Letter"> with an <see cref="Envelope"> and <see cref="IEvent"> as content.
+        /// </summary>
+        /// <param name="correlationId">Unique identifier for the transaction that generated this <see cref="UncommittedEventStream"/></param>
+        /// <param name="uncommittedEventStream">A list of <see cref="IEvent"/> that needs to be committed</param>
+        /// <returns>A collection of <see cref="Letter" /></returns>
+        IEnumerable<Letter> BuildFrom(CorrelationId correlationId, UncommittedEventStream uncommittedEventStream);
+    }
 }

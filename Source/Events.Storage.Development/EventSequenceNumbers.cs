@@ -54,25 +54,6 @@ namespace Dolittle.Runtime.Events.Storage.Development
             }
         }
 
-        /// <inheritdoc/>
-        public SequenceNumber NextForType(IApplicationArtifactIdentifier identifier)
-        {
-            var hashCode = identifier.GetHashCode();
-            lock( _sequenceLocksPerType )
-            {
-                if (!_sequenceLocksPerType.ContainsKey(hashCode)) _sequenceLocksPerType[hashCode] = new object();
-            }
-
-            lock( _sequenceLocksPerType[hashCode] )
-            {
-                var identifierAsString = _applicationArtifactIdentifierStringConverter.AsString(identifier);
-                var file = $"{SequenceForPrefix}{identifierAsString}";
-                var sequence = GetNextInSequenceFromFile(file);
-                _files.WriteString(_path, file, sequence.ToString());
-                return sequence;
-            }
-        }
-
         long GetNextInSequenceFromFile(string file)
         {
             var sequence = 0L;
