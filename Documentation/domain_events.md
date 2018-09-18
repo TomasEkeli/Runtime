@@ -53,6 +53,12 @@ Events can be either “thin” (containing the absolute minimum information req
 
 We *RECOMMEND* thin events over fat events within a *Bounded Context*.  Extra contextual information creates couplings and versioning issues. You can depend on all previously emitted events will having been received and handled within your *Bounded Context*.
 
+### Integration Events
+
+Integration events are Domain Events like internal Domain Events.  However, they differ in that their primary purpose is less about indicating a particular state change within the Bounded Context, as it is in communicating the change to other Bounded Contexts, Applications and Systems.  This can influence how we model and shape our events.  Within a Bounded Context, we are always striving to catch the *why* of a state change. That is, we are not only interested in the fact that a user has been deactivated (*UserAccountDeactivated*) but for what reason (e.g. *SuspectedFraudAccountDetected*, *UserDeactivatedAccount*, etc.)  In another Bounded Context, where we are only interested in keeping a list of currently active accounts, we do not want to have to handle a number of specific events which result in the same effective state change (toggling user active / deactive).
+
+When designing events, you should consider the purpose of the event, particularly with regard to the internal / external dichotomy.  Internal events tend to be thinner and more descriptive of the why.  Integration (external) events tend to be fatter and more broader in their description. The two types of events also have different trajectories in terms of their volatility and how often you can and should change them.  It is easier to evolve and adapt an internal event than an integration event.
+
 ### Metadata
 
 A *Domain Event* has a lot of common contextual information that is useful in the tracing and processing of it.  This metadata includes which *Entity* or *Aggregate* the *Domain Event* relates to, the *User* or *System* that caused the event, a *Correlation id* that allows the *Domain Event* to be related to a *Command* or other action within the system, a UTC timestamp indicating when the *Domain Event* occurred, the version of the *Domain Event* and *Aggregate*, the *Source* (Application, Bounded Context, Tenant) and so on.  This combination of the Event and Contextual metadata is often referred to as the *Event Envelope*.  The metaphor being that the metadata is the envelope and address and so on which the event is that actual contents of the letter.
